@@ -15,15 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class HomeController {
 	
-	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	//DELETE => DELETE / GET => SELECT / POST => INSERT / PUT => UPDATE
-	
 	@GetMapping("/")
 	public String home(Locale locale, Model model) {
 		
 		log.info("Slf4j 환영합니다. 지역은 " + locale + " 입니다.");
-		//logger.info("logger 환영합니다. 지역은 " + locale + " 입니다.");
 		
 		//현재시간 삽입
 		Date date = new Date();
