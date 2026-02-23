@@ -1,0 +1,115 @@
+/* 컨테이너 스타일 - 헤더/메뉴 간섭 방지 */
+.container {
+    width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    border-top: 5px solid #e2012d; /* T1 Red */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.container h2 {
+    color: #1a1a1a;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+/* 테이블 구조 스타일링 */
+.container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.container td {
+    padding: 15px 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* 왼쪽 라벨 셀 */
+.container td:first-child {
+    width: 30%;
+    font-weight: 700;
+    color: #555;
+    background-color: #fafafa;
+    border-radius: 4px 0 0 4px;
+    padding-left: 20px;
+}
+
+/* 입력창 스타일 (readonly 상태) */
+.container input[readonly] {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    background-color: #fcfcfc;
+    color: #1a1a1a;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 6px;
+    outline: none;
+    cursor: default;
+}
+
+/* 버튼 영역 레이아웃 */
+.container div:has(> button) {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* 공통 버튼 스타일 */
+.container button {
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    border: none;
+    flex: 1;
+}
+
+/* EDIT 버튼 (T1 Gold 포인트) */
+#btnEdit {
+    background-color: #ffffff !important;
+    color: #c69c6d !important;
+    border: 2px solid #c69c6d !important;
+}
+
+#btnEdit:hover {
+    background-color: #c69c6d !important;
+    color: #ffffff !important;
+}
+
+/* REMOVE 버튼 (T1 Red) */
+#btnRemove {
+    background-color: #e2012d !important;
+    color: #ffffff !important;
+}
+
+#btnRemove:hover {
+    background-color: #b00024 !important;
+}
+
+/* LIST 버튼 (Dark Grey) */
+#btnList {
+    background-color: #333 !important;
+    color: #ffffff !important;
+}
+
+#btnList:hover {
+    background-color: #000 !important;
+}
+
+/* 호버 공통 애니메이션 */
+.container button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,106 @@
+/* 전체 공통 폰트 설정만 body에 남김 (간섭 최소화) */
+body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 리스트/등록 페이지 본문 영역 전용 배경 */
+.main-wrapper {
+    background-color: #fcfcfc;
+    min-height: 80vh; /* 본문 영역 확보 */
+    padding: 50px 0;
+    width: 100%;
+}
+
+.container {
+    width: 500px;
+    margin: 50px auto; /* 중앙 정렬 */
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    border-top: 5px solid #e2012d; /* T1 Red 상단 포인트 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    color: #1a1a1a;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 35px;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+/* 폼 요소 스타일 */
+.form-group {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #444;
+    font-size: 14px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    color: #1a1a1a;
+    box-sizing: border-box; /* 패딩 포함 크기 조절 */
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #c69c6d; /* 포커스 시 T1 Gold */
+}
+
+/* 버튼 영역 - ID 선택자로 확실하게 고정 */
+div > button {
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 14px 0;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    width: 48%; /* 버튼 두 개를 나란히 배치 */
+    display: inline-block;
+}
+
+/* REGISTER 버튼 (T1 RED) */
+#btnRegister {
+    background-color: #e2012d !important;
+    color: #ffffff !important;
+    border: none !important;
+    margin-right: 2%;
+}
+
+/* LIST 버튼 (T1 GOLD Border) */
+#btnList {
+    background-color: #ffffff !important;
+    color: #c69c6d !important;
+    border: 2px solid #c69c6d !important;
+}
+
+/* 버튼 호버 효과 */
+#btnRegister:hover {
+    background-color: #b00024 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(226, 1, 45, 0.3);
+}
+
+#btnList:hover {
+    background-color: #c69c6d !important;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(198, 156, 109, 0.2);
+}

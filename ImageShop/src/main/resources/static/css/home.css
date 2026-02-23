@@ -1,13 +1,42 @@
-body {
-  background-color: lightblue;
+/* 다른 영역은 건드리지 않고, 오직 메인 컨텐츠 영역만 스타일링 */
+.home-content {
+    padding: 100px 20px !important; /* 상하 여백을 주어 중앙에 위치하게 함 */
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-h1 {
-  color: white;
-  text-align: center;
+/* 웰컴 메시지: 강렬한 T1 Black & Red 포인트 */
+.home-content h1 {
+    font-size: 42px;
+    font-weight: 900;
+    color: #1a1a1a; /* T1 Black */
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+    position: relative;
 }
 
-p {
-  font-family: verdana;
-  font-size: 20px;
+/* 웰컴 메시지 하단에 T1 Red 장식 라인 */
+.home-content h1::after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #e2012d; /* T1 Red */
+    margin: 15px auto 0;
+}
+
+/* 서버 시간 표시: T1 Gold 엠블럼 느낌 */
+.home-content p {
+    font-size: 18px;
+    font-weight: 600;
+    color: #c69c6d; /* T1 Gold */
+    background-color: #f9f9f9;
+    padding: 12px 30px;
+    border: 1px solid #c69c6d;
+    border-radius: 50px; /* 둥근 캡슐 형태 */
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(198, 156, 109, 0.15);
 }
