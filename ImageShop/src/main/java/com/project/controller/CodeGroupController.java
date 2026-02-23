@@ -13,8 +13,6 @@ import com.project.service.CodeGroupService;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 @Slf4j
 @Controller
 @RequestMapping("/codegroup")
@@ -68,4 +66,26 @@ public class CodeGroupController {
 		}
 		return "redirect:/codegroup/list";
 	}
+	
+	// 수정 페이지
+	@GetMapping("/modify")
+	public void modifyForm(CodeGroup codeGroup, Model model) throws Exception {
+		model.addAttribute(service.read(codeGroup));
+	}
+	
+	// 코드그룹 수정 등록 페이지
+	@PostMapping("/modify")
+	public String modify(CodeGroup codeGroup, RedirectAttributes rttr) throws Exception {
+		int count = service.update(codeGroup);
+		if (count != 0) {
+			// rttr.addFlashAttribute("msg", "SUCCESS") 세션에 정보를 임시저장한다.
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			rttr.addFlashAttribute("msg", "FAIL");
+		}
+		return "redirect:/codegroup/list";
+	}
+	
+	
+	
 }

@@ -16,4 +16,6 @@ public interface CodeGroupMapper {
 
 	public int remove(CodeGroup codeGroup) throws Exception;
 
+	public int modify(CodeGroup codeGroup) throws Exception;
+
 }

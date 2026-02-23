@@ -42,7 +42,7 @@
 }
 
 /* 입력창 스타일 (readonly 상태) */
-.container input[readonly] {
+.container input {
     width: 100%;
     padding: 10px 15px;
     border: 1px solid #eee;
@@ -84,6 +84,18 @@
 }
 
 #btnEdit:hover {
+    background-color: #c69c6d !important;
+    color: #ffffff !important;
+}
+
+/* Modify 버튼 (T1 Gold 포인트) */
+#btnModify {
+    background-color: #ffffff !important;
+    color: #c69c6d !important;
+    border: 2px solid #c69c6d !important;
+}
+
+#btnModify:hover {
     background-color: #c69c6d !important;
     color: #ffffff !important;
 }

@@ -17,5 +17,9 @@
 	<delete id="remove">
 		DELETE FROM code_group WHERE group_code = #{groupCode}
 	</delete>
+	
+	<update id="modify">
+		UPDATE code_group SET group_name = #{groupName} WHERE group_code = #{groupCode}
+	</update>
 
 </mapper>
