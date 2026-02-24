@@ -115,3 +115,103 @@ hr {
     background-color: #eeeeee;
     margin: 0 !important;
 }
+
+/* 상단 헤더 & 메뉴 공통 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* 1. 홈/헤더 영역 (화이트 배경 유지) */
+.header-container {
+    background-color: #ffffff;
+    padding: 25px 0 !important;
+    text-align: center;
+}
+
+.header-container a {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #1a1a1a;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    transition: transform 0.3s ease;
+}
+
+/* 2. 메뉴 컨테이너 (여기가 핵심!) */
+.menu-container {
+    background-color: #151515; /* 더 진한 블랙 */
+    width: 100%;
+    height: 70px; /* 메뉴바 높이 확장 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #333;
+    border-bottom: 2px solid #c69c6d; /* 하단 골드 포인트 라인 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* 테이블 구조 제거 느낌으로 스타일링 */
+.menu-container table {
+    width: 800px; /* 메뉴바 너비 */
+    margin: 0 !important;
+    border-collapse: collapse;
+}
+
+.menu-container td {
+    text-align: center;
+    padding: 0;
+}
+
+/* 메뉴 링크 스타일 */
+.menu-container a {
+    display: block;
+    color: #ffffff; /* 기본 화이트 */
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 22px 0; /* 높이에 맞춘 패딩 */
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* 메뉴 호버 효과 (골드 포인트) */
+.menu-container a:hover {
+    color: #c69c6d; /* T1 Gold */
+    background-color: rgba(255, 255, 255, 0.05); /* 미세한 배경 변화 */
+}
+
+/* 호버 시 하단에 밑줄 애니메이션 */
+.menu-container a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background-color: #e2012d; /* T1 Red 언더라인 */
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.menu-container a:hover::after {
+    width: 100%;
+}
+
+/* 구분선 제거 (메뉴바 자체가 구분선 역할) */
+hr {
+    display: none;
+}
+
+/* 모든 페이지에서 세로 스크롤바 영역을 항상 확보 (메뉴 쏠림 방지) */
+html {
+    overflow-y: scroll;
+}
+
+/* 추가로 전체 너비 계산 시 스크롤바 너비를 고려하도록 설정 */
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw; /* 뷰포트 너비 고정 */
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}

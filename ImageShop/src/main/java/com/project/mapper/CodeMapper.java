@@ -10,6 +10,8 @@ public interface CodeMapper {
 	
 	//목록 조회
 	public List<CodeLabelValue> getCodeGroupList() throws Exception;
+
+	public List<CodeLabelValue> getCodeList(String groupCode) throws Exception;
 	
 	//상세 조회
 	

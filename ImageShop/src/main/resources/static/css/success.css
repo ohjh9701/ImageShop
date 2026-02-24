@@ -1,0 +1,111 @@
+/* 성공 페이지 전용 배경 */
+body {
+    background-color: #fcfcfc;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* 화면 중앙 배치를 위한 높이 설정 */
+    font-family: 'Pretendard', -apple-system, sans-serif;
+}
+
+/* 성공 메시지 카드 */
+.success {
+    text-align: center;
+    background: #ffffff;
+    padding: 60px 40px;
+    border-radius: 20px;
+    width: 450px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    border-top: 8px solid #c69c6d; /* T1 Gold 상단 포인트 */
+    animation: fadeInUp 0.8s ease-out; /* 등장 애니메이션 */
+}
+
+/* 체크 아이콘 (CSS로 가볍게 구현) */
+.success::before {
+    content: "✓";
+    display: block;
+    width: 80px;
+    height: 80px;
+    background-color: #e2012d; /* T1 Red */
+    color: white;
+    font-size: 40px;
+    line-height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 30px;
+    box-shadow: 0 10px 20px rgba(226, 1, 45, 0.2);
+}
+
+/* 축하 메시지 제목 */
+.success h2 {
+    color: #1a1a1a;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+/* 가입된 사용자 이름 강조 */
+.success h2 strong, 
+.success h2 b {
+    color: #e2012d;
+    font-weight: 900;
+}
+
+/* 로그인 버튼 스타일 */
+.success a.login{
+    display: block;
+    background-color: #e2012d; /* T1 Black */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* 로그인 버튼 호버 */
+.success a.login:hover {
+    background-color: #ff012d; /* T1 Gold로 변신 */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(198, 156, 109, 0.3);
+}
+
+/* 로그인 버튼 스타일 */
+.success a.main{
+    display: block;
+    background-color: #1a1a1a; /* T1 Black */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* 로그인 버튼 호버 */
+.success a.main:hover {
+    background-color: #c69c6d; /* T1 Gold로 변신 */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(198, 156, 109, 0.3);
+}
+
+/* 등장 애니메이션 정의 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

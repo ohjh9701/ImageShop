@@ -1,0 +1,129 @@
+/* 본문 배경 및 레이아웃 */
+.main-wrapper {
+    background-color: #fcfcfc;
+    padding: 60px 0;
+    min-height: 700px; /* 입력 항목이 많으므로 높이 충분히 확보 */
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* 회원가입 컨테이너 */
+.main-wrapper .container {
+    width: 480px; /* 테이블 구조를 고려하여 약간 넓게 설정 */
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 15px;
+    border-top: 6px solid #e2012d; /* T1 Red */
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+.main-wrapper h2 {
+    color: #1a1a1a;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+
+/* 사용자 입력 테이블 스타일 */
+.user_table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.user_table td {
+    padding: 12px 5px;
+    vertical-align: middle;
+}
+
+/* 왼쪽 항목명(라벨) 열 */
+.user_table td:first-child {
+    width: 120px;
+    font-weight: 700;
+    color: #444;
+    font-size: 15px;
+}
+
+/* 입력창 및 셀렉트박스 공통 스타일 */
+.user_table input[type="text"], 
+.user_table input[type="password"],
+.user_table select {
+    width: 100%;
+    height: 48px;
+    padding: 10px 18px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #1a1a1a;
+    box-sizing: border-box;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+/* 포커스 효과 (T1 Gold) */
+.user_table input:focus, 
+.user_table select:focus {
+    outline: none;
+    border-color: #c69c6d;
+    box-shadow: 0 0 0 3px rgba(198, 156, 109, 0.15);
+}
+
+/* 에러 메시지 스타일 */
+.user_table font[color="red"] {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* 버튼 영역 레이아웃 (Security 권한 버튼 포함) */
+.main-wrapper div:has(> button) {
+    display: flex;
+    gap: 15px;
+    margin-top: 40px;
+}
+
+/* 버튼 공통 스타일 */
+.main-wrapper button {
+    flex: 1;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 16px;
+    padding: 16px 0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    border: none;
+}
+
+/* 가입 버튼 (T1 RED) */
+#btnRegister {
+    background-color: #e2012d !important;
+    color: #ffffff !important;
+}
+
+/* 목록 버튼 (T1 Gold 테두리 - 관리자 전용) */
+#btnList {
+    background-color: #ffffff !important;
+    color: #c69c6d !important;
+    border: 2px solid #c69c6d !important;
+}
+
+/* 호버 효과 */
+#btnRegister:hover {
+    background-color: #b00024 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(226, 1, 45, 0.3);
+}
+
+#btnList:hover {
+    background-color: #c69c6d !important;
+    color: #ffffff !important;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(198, 156, 109, 0.2);
+}

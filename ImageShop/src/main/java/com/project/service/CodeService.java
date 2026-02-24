@@ -11,6 +11,8 @@ public interface CodeService {
 	
 	//코드라벨 목록(리스트) 페이지 요청
 	public List<CodeLabelValue> getCodeGroupList() throws Exception;
+
+	public List<CodeLabelValue> getCodeList(String groupCode) throws Exception;
 	
 	//코드라벨 상세 페이지 요청
 	
