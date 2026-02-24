@@ -114,3 +114,70 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(198, 156, 109, 0.2);
 }
+
+
+/* 테이블 내부 폼 레이아웃 최적화 */
+.main-wrapper .container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.main-wrapper .container td {
+    padding: 12px 5px;
+    vertical-align: middle;
+}
+
+/* 왼쪽 항목명(라벨) 열 스타일 */
+.main-wrapper .container td:first-child {
+    width: 30%;
+    font-weight: 700;
+    color: #444;
+    font-size: 14px;
+}
+
+/* 입력창 및 셀렉트 박스 공통 (너비 꽉 차게) */
+.main-wrapper input[type="text"], 
+.main-wrapper select {
+    width: 100%;
+    height: 45px; /* 높이 통일 */
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    color: #1a1a1a;
+    box-sizing: border-box;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+/* 셀렉트 박스 전용 스타일 (화살표 여백 등) */
+.main-wrapper select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    appearance: none; /* 기본 화살표 숨김 */
+    padding-right: 40px;
+}
+
+/* 포커스 효과 (T1 Gold) */
+.main-wrapper input[type="text"]:focus, 
+.main-wrapper select:focus {
+    outline: none;
+    border-color: #c69c6d;
+    box-shadow: 0 0 0 3px rgba(198, 156, 109, 0.1);
+}
+
+/* 에러 메시지 열 스타일 */
+.main-wrapper td:last-child {
+    width: 5px; /* 공간 최소화 */
+    white-space: nowrap;
+}
+
+/* 에러 텍스트 세밀 조정 */
+.main-wrapper font[color="red"] {
+    margin-top: 0;
+    margin-left: 10px;
+    font-size: 12px;
+}

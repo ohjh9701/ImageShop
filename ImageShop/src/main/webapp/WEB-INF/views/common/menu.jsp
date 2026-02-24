@@ -7,8 +7,12 @@
 <div class="menu-container" align="center">
     <table>
         <tr>
-            <td width="100"><a href="/user/register"><spring:message code="header.joinMember" /></a></td>
-            <td width="100"><a href="/codegroup/list"><spring:message code="menu.codegroup.list" /></a></td>
+        	<!-- 회원가입메뉴 -->
+            <td width="30%"><a href="/user/register"><spring:message code="header.joinMember" /></a></td>
+        	<!-- 코드그룹관리메뉴 -->
+            <td width="40%"><a href="/codegroup/list"><spring:message code="menu.codegroup.list" /></a></td>
+        	<!-- 코드관리메뉴 -->
+			<td width="30%"><a href="/codedetail/list"><spring:message code="menu.codedetail.list" /></a></td>
         </tr>
     </table>
 </div>
