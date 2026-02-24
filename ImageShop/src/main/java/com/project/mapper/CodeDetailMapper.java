@@ -13,10 +13,14 @@ public interface CodeDetailMapper {
 
 	//목록 조회
 	public List<CodeDetail> list() throws Exception;
-	
+
 	//상세 조회
-	
+	public CodeDetail read(CodeDetail codeDetail) throws Exception;
+
 	//삭제 처리
+	public int delete(CodeDetail codeDetail) throws Exception;
 	
 	//수정 처리
+	public int update(CodeDetail codeDetail) throws Exception;
+
 }

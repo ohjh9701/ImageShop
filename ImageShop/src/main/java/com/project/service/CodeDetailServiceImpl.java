@@ -17,6 +17,7 @@ public class CodeDetailServiceImpl implements CodeDetailService {
 	private CodeDetailMapper mapper;
 
 	@Override
+	@Transactional
 	public int register(CodeDetail codeDetail) throws Exception {
 		String groupCode = codeDetail.getGroupCode();
 		// 그룹코드 정렬 순서의 최대값
@@ -29,6 +30,21 @@ public class CodeDetailServiceImpl implements CodeDetailService {
 	@Override
 	public List<CodeDetail> list() throws Exception {
 		return mapper.list();
+	}
+
+	@Override
+	public CodeDetail read(CodeDetail codeDetail) throws Exception {
+		return mapper.read(codeDetail);
+	}
+
+	@Override
+	public int modify(CodeDetail codeDetail) throws Exception {
+		return mapper.update(codeDetail);
+	}
+
+	@Override
+	public int remove(CodeDetail codeDetail) throws Exception {
+		return mapper.delete(codeDetail);
 	}
 
 	

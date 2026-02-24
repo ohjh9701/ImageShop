@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Code Detail Registration</title>
+<title>T1 Code Detail List</title>
 <link rel="stylesheet" href="/css/list.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -47,7 +47,7 @@
 							<td align="center">${codeDetail.groupCode}</td>
 							<td align="center">${codeDetail.codeValue}</td>
 							<td align="left"><a
-								href="/codedetail/read?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}">${codeDetail.codeName}</a>
+								href="/codedetail/detail?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}">${codeDetail.codeName}</a>
 							</td>
 							<td align="center">${codeDetail.sortSeq}</td>
 							<td align="center"><fmt:formatDate
