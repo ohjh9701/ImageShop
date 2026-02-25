@@ -21,4 +21,6 @@ public interface MemberMapper {
 
 	public void updateAuth(MemberAuth memberAuth) throws Exception;
 
+	public int delete(Member member) throws Exception;
+
 }

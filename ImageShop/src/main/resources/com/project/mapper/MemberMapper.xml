@@ -51,18 +51,25 @@
 		A.user_no WHERE M.user_no = #{userNo}
 	</select>
 
-	<!-- 삭제 처리 -->
+	<!-- 권한 삭제 처리 -->
 	<delete id="deleteAuth">
 		DELETE FROM member_auth WHERE user_no = #{userNo}
 	</delete>
-
+	
+	<!-- 권한 수정 처리 -->
+	<insert id="updateAuth">
+		INSERT INTO member_auth VALUES(#{userNo}, #{auth})
+	</insert>
+	
 	<!-- 수정 처리 -->
 	<update id="update">
 		UPDATE member SET user_pw = #{userPw}, user_name = #{userName}, job=#{job} WHERE user_no = #{userNo}
 	</update>
 	
-	<insert id="updateAuth">
-		INSERT INTO member_auth VALUES(#{userNo}, #{auth})
-	</insert>
-
+	<!-- 삭제 처리 -->	
+	<delete id="delete">
+		DELETE FROM member WHERE user_no = #{userNo}
+	</delete>
+	
+	
 </mapper>

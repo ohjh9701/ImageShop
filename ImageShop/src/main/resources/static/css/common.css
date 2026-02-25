@@ -69,43 +69,51 @@ div[align="center"]:last-of-type p {
 /* 헤더 전체 컨테이너 */
 .header-container {
     background-color: #ffffff;
-    padding: 15px 0 !important; /* 위아래 여백을 줘서 웅장하게 */
+    padding: 25px 0 !important;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
 }
 
-/* 홈 링크 스타일 (T1 로고 느낌) */
+/* 홈 링크 스타일 (애니메이션 버전 고수) */
 .header-container a {
-    font-size: 2.0rem; /* 크기를 확 키워서 강조 */
-    font-weight: 900; /* 아주 두껍게 */
-    color: #1a1a1a; /* T1 Black */
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #1a1a1a;
     text-transform: uppercase;
-    letter-spacing: 4px; /* 자간을 넓혀 고급스럽게 */
+    letter-spacing: 6px;
     text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: inline-block;
+    display: inline-block; /* 너비와 패딩을 가지기 위해 유지 */
     position: relative;
+    padding-bottom: 12px;
+    transition: all 0.4s ease;
+    margin: 0 auto; /* 안전장치 */
 }
 
-/* 텍스트에 레드&골드 그라데이션 살짝 가미 (선택 사항) */
-.header-container a:hover {
-    color: #e2012d; /* 호버 시 T1 Red */
-}
-
-/* 헤더 아래 장식 바 */
-.header-container::after {
+/* 중앙에서 펼쳐지는 언더바 (그대로 유지) */
+.header-container a::after {
     content: "";
-    display: block;
-    width: 120px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
     height: 4px;
-    background: linear-gradient(to right, #e2012d, #c69c6d); /* Red to Gold */
-    margin: 0 auto;
+    background: linear-gradient(to right, #e2012d, #c69c6d);
     border-radius: 2px;
+    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* 테이블 구조 최적화 */
-.header-container table {
-    margin: 0 auto !important;
-    border-collapse: collapse;
+/* 4. 호버 시 바가 글자 너비만큼 펼쳐짐 */
+.header-container a:hover {
+    color: #e2012d; /* 글자색은 T1 Red로 */
+}
+
+.header-container a:hover::after {
+    width: 100%;
 }
 
 /* 기존 hr 태그는 숨기거나 더 얇게 처리 */
@@ -140,13 +148,12 @@ body {
 
 /* 2. 메뉴 컨테이너 (구조적 안정성 강화) */
 .menu-container {
-    background-color: #151515;
+    background-color: #ffffff;
     width: 100%;
     height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid #333;
     border-bottom: 2px solid #c69c6d;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     /* 폰트 렌더링 최적화 서브픽셀 방지 */
@@ -163,22 +170,15 @@ body {
 /* 메뉴 링크 스타일 (선명도 극대화) */
 .menu-container a {
     display: block;
-    color: #ffffff;
+    color: #151515;
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 0.5px; /* 자간을 너무 넓히면 렌더링이 튈 수 있음 */
     padding: 22px 0;
     text-align: center;
     text-decoration: none;
-    
-    /* 폰트 깨짐 방지 핵심 속성 */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transform: translateZ(0); 
-    backface-visibility: hidden;
-    perspective: 1000px;
-    filter: blur(0); /* 브라우저의 미세한 블러 제거 */
-    
+    overflow: visible !important; /* 가상 요소가 밖으로 삐져나와도 보이게 함 */
+    position: relative; /* 자식인 ::after의 기준점 */
     transition: color 0.3s ease; /* 전체 transition보다 특정 속성만 지정하는 게 안정적 */
 }
 
@@ -192,14 +192,23 @@ body {
 .menu-container a::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: 0;           /* 메뉴바 맨 하단에 붙임 */
     left: 50%;
-    width: 0;
-    height: 3px;
-    background-color: #e2012d;
-    transition: width 0.3s ease; /* transform 대신 width 사용 시 더 안정적일 수 있음 */
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* 정확히 중앙 정렬 */
+    
+    display: block;      /* ★ 가상 요소를 블록 요소로 선언 (필수) */
+    width: 0;            /* 시작은 0 */
+    height: 3px;         /* 두께 */
+    background-color: #e2012d; /* T1 Red */
+    
+    transition: width 0.3s ease-in-out; 
     will-change: width;
+    z-index: 10;         /* 다른 요소보다 위에 보이게 */
+}
+
+/* 호버 시 너비를 100%로 확장 */
+.menu-container a:hover::after {
+    width: 100%;
 }
 
 /* 구분선 제거 (메뉴바 자체가 구분선 역할) */

@@ -69,4 +69,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return count;
 	}
+
+	@Override
+	public int remove(Member member) throws Exception {
+		// 회원권한 삭제
+		mapper.deleteAuth(member.getUserNo());
+		
+		return mapper.delete(member);
+	}
 }

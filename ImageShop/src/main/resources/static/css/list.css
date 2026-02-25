@@ -10,10 +10,12 @@
 }
 
 .container h2 {
-    color: #1a1a1a;
-    font-size: 24px;
-    margin-bottom: 25px;
+     color: #1a1a1a;
+    font-size: 26px;
     font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
 }
 
 /* 신규 등록 버튼 (우측 상단 배치) */
@@ -32,7 +34,8 @@
 }
 
 .container a[href="register"]:hover {
-    background-color: #b00024;
+     background-color: #1a1a1a; /* 호버 시 블랙 */
+    transform: translateY(-2px);
 }
 
 /* 테이블 스타일: JSP의 border="1"을 덮어쓰기 위해 구체적으로 지정 */

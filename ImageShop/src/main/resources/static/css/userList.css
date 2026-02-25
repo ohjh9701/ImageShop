@@ -22,15 +22,16 @@
 /* 등록 버튼 (Action New) */
 .container a[href="/user/register"] {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #c69c6d; /* T1 Gold */
-    color: #fff;
+    float: right;
+    background-color: #e2012d;
+    color: #fff !important;
+    padding: 8px 16px;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: 700;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    float: right; /* 우측 상단 배치 */
-    transition: all 0.2s ease;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 15px;
+    transition: background 0.2s;
 }
 
 .container a[href="/user/register"]:hover {
@@ -100,8 +101,7 @@
 
 /* 리스트가 비어있을 때 */
 .container td[colspan="6"] {
-    padding: 50px 0;
     text-align: center;
-    color: #bbb;
-    font-style: italic;
+    padding: 40px 0;
+    color: #999;
 }

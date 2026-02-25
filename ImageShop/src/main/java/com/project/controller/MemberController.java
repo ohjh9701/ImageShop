@@ -120,5 +120,18 @@ public class MemberController {
 		}
 		return "redirect:/user/list";
 	}
+	
+	@GetMapping("/remove")
+	public String getMethodName(Member member, RedirectAttributes rttr) throws Exception {
+		int count = service.remove(member);
+
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			rttr.addFlashAttribute("msg", "FAIL");
+		}
+		return "redirect:/user/list";
+	}
+	
 
 }
