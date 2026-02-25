@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @EnableWebSecurity
-//@EnableMethodSecurity(prePostEnabled=true, securedEnabled=true)
+@EnableMethodSecurity(prePostEnabled=true, securedEnabled=true)
 public class SecurityConfig {
 
 	@Autowired
@@ -39,16 +40,16 @@ public class SecurityConfig {
 
 		// 1.csrf토큰 비활성화
 		httpSecurity.csrf((csrf) -> csrf.disable());
-
 		// 2.접근제한 정책 (시큐리티 인가정책)
-		httpSecurity.authorizeHttpRequests(auth -> auth.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
-				.requestMatchers("/accessError", "/login", "/logout").permitAll().requestMatchers("/board/**")
-				.authenticated() // 게시판: 인증 필요
-				.requestMatchers("/manager/**").hasRole("MANAGER") // 매니저기능: 인가 필요
-				.requestMatchers("/admin/**").hasRole("ADMIN") // 관리자기능: 인가 필요
+		httpSecurity.authorizeHttpRequests(auth -> auth
+				.dispatcherTypeMatchers(DispatcherType.FORWARD).permitAll()
+				.requestMatchers("/accessError", "/login", "/logout").permitAll()
+				//.requestMatchers("/board/**")
+				//.authenticated() // 게시판: 인증 필요
+				//.requestMatchers("/manager/**").hasRole("MANAGER") // 매니저기능: 인가 필요
+				//.requestMatchers("/admin/**").hasRole("ADMIN") // 관리자기능: 인가 필요
 				.anyRequest().permitAll() // 그 외 모든 요청은 전부 인증/인가가 필요없이 허용
 		);
-
 		// 3.등록한 CustomAccessDeniedHandler.java를 접근 거부 처리자로 지정한다.
 		httpSecurity.exceptionHandling(exception -> exception.accessDeniedHandler(createAccessDeniedHandler()));
 

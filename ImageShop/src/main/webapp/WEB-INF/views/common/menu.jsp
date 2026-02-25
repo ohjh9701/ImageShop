@@ -11,14 +11,29 @@
 		<tr>
 			<td width="20%" class="menu-home"><a href="/"><spring:message
 						code="header.home" /></a></td>
-
-			<td width="20%"><a href="/user/list"><spring:message
-						code="menu.user.admin" /></a></td>
-			<td width="20%"><a href="/codegroup/list"><spring:message
-						code="menu.codegroup.list" /></a></td>
-			<td width="20%"><a href="/codedetail/list"><spring:message
-						code="menu.codedetail.list" /></a></td>
-
+						
+			<!-- 로그인을 하지 않은 경우 true -->
+			<sec:authorize access="!isAuthenticated()">
+			</sec:authorize>
+			
+			<!-- 인증된 사용자인 경우 true -->
+			<sec:authorize access="isAuthenticated()">
+			
+				<!-- 관리자 권한을 가진 사용자인 경우 true -->
+				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<td width="20%"><a href="/user/list"><spring:message
+								code="menu.user.admin" /></a></td>
+					<td width="20%"><a href="/codegroup/list"><spring:message
+								code="menu.codegroup.list" /></a></td>
+					<td width="20%"><a href="/codedetail/list"><spring:message
+								code="menu.codedetail.list" /></a></td>
+				</sec:authorize>
+				
+				<!-- 회원 권한을 가진 사용자인 경우 true -->
+				<sec:authorize access="hasRole('ROLE_MEMBER')">
+				</sec:authorize>
+			</sec:authorize>
+			
 			<td width="20%" class="menu-auth"><sec:authorize
 					access="!isAuthenticated()">
 					<div class="auth-group">
