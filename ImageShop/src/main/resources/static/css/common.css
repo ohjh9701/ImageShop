@@ -1,230 +1,366 @@
 /* 상단 헤더 & 메뉴 공통 스타일 */
 header, nav, footer {
-    width: 100%;
-    font-family: 'Pretendard', sans-serif;
+	width: 100%;
+	font-family: 'Pretendard', sans-serif;
 }
 
 /* Header & Menu 테이블 초기화 */
 div[align="center"] table, div[align="center"] table {
-    border-collapse: collapse;
-    margin: 10px 0;
+	border-collapse: collapse;
+	margin: 10px 0;
 }
 
 /* 링크 스타일 (T1 컨셉) */
 a {
-    text-decoration: none;
-    color: #1a1a1a; /* 기본 블랙 */
-    font-weight: 700;
-    font-size: 14px;
-    transition: all 0.2s ease;
-    padding: 5px 10px;
+	text-decoration: none;
+	color: #1a1a1a; /* 기본 블랙 */
+	font-weight: 700;
+	font-size: 14px;
+	transition: all 0.2s ease;
+	padding: 5px 10px;
 }
 
 a:hover {
-    color: #e2012d; /* 호버 시 T1 Red */
+	color: #e2012d; /* 호버 시 T1 Red */
 }
 
 /* 구분선 스타일 */
 hr {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #c69c6d, transparent); /* 골드 그라데이션 라인 */
-    margin: 0;
+	border: 0;
+	height: 1px;
+	background: linear-gradient(to right, transparent, #c69c6d, transparent);
+	/* 골드 그라데이션 라인 */
+	margin: 0;
 }
 
 /* Header (Home 버튼 부분) */
 div[align="center"]:first-of-type {
-    background-color: #ffffff;
-    padding: 15px 0;
+	background-color: #ffffff;
+	padding: 15px 0;
 }
 
 /* Menu (오른쪽 정렬 부분) */
 div[align="right"] {
-    background-color: #1a1a1a; /* 메뉴바는 블랙으로 포인트 */
-    padding: 10px 50px;
+	background-color: #1a1a1a; /* 메뉴바는 블랙으로 포인트 */
+	padding: 10px 50px;
 }
 
 div[align="right"] a {
-    color: #c69c6d; /* 블랙 배경 위에는 골드 텍스트 */
+	color: #c69c6d; /* 블랙 배경 위에는 골드 텍스트 */
 }
 
 div[align="right"] a:hover {
-    color: #ffffff;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+	color: #ffffff;
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
 /* Footer */
 div[align="center"]:last-of-type {
-    padding: 30px 0;
-    color: #888;
-    font-size: 12px;
-    letter-spacing: 1px;
+	padding: 30px 0;
+	color: #888;
+	font-size: 12px;
+	letter-spacing: 1px;
 }
 
 div[align="center"]:last-of-type p {
-    margin: 0;
-    font-weight: 500;
+	margin: 0;
+	font-weight: 500;
 }
 
 /* 헤더 전체 컨테이너 */
 .header-container {
-    background-color: #ffffff;
-    padding: 25px 0 !important;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    width: 100%;
+	background-color: #ffffff;
+	padding: 25px 0 !important;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }
 
 /* 홈 링크 스타일 (애니메이션 버전 고수) */
 .header-container a {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    text-transform: uppercase;
-    letter-spacing: 6px;
-    text-decoration: none;
-    display: inline-block; /* 너비와 패딩을 가지기 위해 유지 */
-    position: relative;
-    padding-bottom: 12px;
-    transition: all 0.4s ease;
-    margin: 0 auto; /* 안전장치 */
+	font-size: 2.2rem;
+	font-weight: 900;
+	color: #1a1a1a;
+	text-transform: uppercase;
+	letter-spacing: 6px;
+	text-decoration: none;
+	display: inline-block; /* 너비와 패딩을 가지기 위해 유지 */
+	position: relative;
+	padding-bottom: 12px;
+	transition: all 0.4s ease;
+	margin: 0 auto; /* 안전장치 */
 }
 
 /* 중앙에서 펼쳐지는 언더바 (그대로 유지) */
 .header-container a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(to right, #e2012d, #c69c6d);
-    border-radius: 2px;
-    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 60px;
+	height: 4px;
+	background: linear-gradient(to right, #e2012d, #c69c6d);
+	border-radius: 2px;
+	transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* 4. 호버 시 바가 글자 너비만큼 펼쳐짐 */
 .header-container a:hover {
-    color: #e2012d; /* 글자색은 T1 Red로 */
+	color: #e2012d; /* 글자색은 T1 Red로 */
 }
 
 .header-container a:hover::after {
-    width: 100%;
+	width: 100%;
 }
 
 /* 기존 hr 태그는 숨기거나 더 얇게 처리 */
 hr {
-    border: 0;
-    height: 1px;
-    background-color: #eeeeee;
-    margin: 0 !important;
+	border: 0;
+	height: 1px;
+	background-color: #eeeeee;
+	margin: 0 !important;
 }
 
 /* 상단 헤더 & 메뉴 공통 스타일 */
 body {
-    margin: 0;
-    padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /* 1. 홈/헤더 영역 (화이트 배경 유지) */
 .header-container {
-    background-color: #ffffff;
-    padding: 25px 0 !important;
-    text-align: center;
+	background-color: #ffffff;
+	padding: 25px 0 !important;
+	text-align: center;
 }
 
 .header-container a {
-    font-size: 2.2rem;
-    font-weight: 900;
-    color: #1a1a1a;
-    letter-spacing: 6px;
-    text-transform: uppercase;
-    transition: transform 0.3s ease;
+	font-size: 2.2rem;
+	font-weight: 900;
+	color: #1a1a1a;
+	letter-spacing: 6px;
+	text-transform: uppercase;
+	transition: transform 0.3s ease;
 }
 
-/* 2. 메뉴 컨테이너 (구조적 안정성 강화) */
+/* 2. 메뉴 컨테이너 (구조적 안정성 및 화이트 테마) */
 .menu-container {
-    background-color: #ffffff;
-    width: 100%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 2px solid #c69c6d;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    /* 폰트 렌더링 최적화 서브픽셀 방지 */
-    font-variant-numeric: tabular-nums; 
+	background-color: #ffffff; /* 화이트 배경 */
+	width: 100%;
+	height: 60px; /* 높이를 충분히 확보하여 패딩 간섭 방지 */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 2px solid #c69c6d; /* T1 Gold 하단 라인 */
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	font-variant-numeric: tabular-nums;
 }
 
 .menu-container table {
-    width: 1100px; /* 여유 있게 조정 */
-    margin: 0 auto !important;
-    border-collapse: collapse;
-    table-layout: fixed; /* ★ 각 셀의 너비를 고정하여 글자 쏠림 방지 */
+	width: 1100px;
+	margin: 0 auto !important;
+	border-collapse: collapse;
+	table-layout: fixed;
 }
 
-/* 메뉴 링크 스타일 (선명도 극대화) */
+/* 메뉴 링크 공통 스타일 */
 .menu-container a {
-    display: block;
-    color: #151515;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.5px; /* 자간을 너무 넓히면 렌더링이 튈 수 있음 */
-    padding: 22px 0;
-    text-align: center;
-    text-decoration: none;
-    overflow: visible !important; /* 가상 요소가 밖으로 삐져나와도 보이게 함 */
-    position: relative; /* 자식인 ::after의 기준점 */
-    transition: color 0.3s ease; /* 전체 transition보다 특정 속성만 지정하는 게 안정적 */
+	display: block;
+	color: #151515; /* 텍스트 블랙 */
+	font-size: 16px;
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	padding: 18px 0;
+	text-align: center;
+	text-decoration: none;
+	overflow: visible !important;
+	position: relative;
+	transition: color 0.3s ease;
 }
 
-/* 호버 효과에서 레이아웃에 영향을 주는 속성 최소화 */
+/* 일반 메뉴 호버 효과 */
 .menu-container a:hover {
-    color: #c69c6d;
-    background-color: rgba(255, 255, 255, 0.02);
+	color: #c69c6d; /* T1 Gold */
 }
 
-/* 언더라인 애니메이션 (글자 흔들림 방지 처리) */
+/* 언더라인 애니메이션 (T1 Red) */
 .menu-container a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;           /* 메뉴바 맨 하단에 붙임 */
-    left: 50%;
-    transform: translateX(-50%); /* 정확히 중앙 정렬 */
-    
-    display: block;      /* ★ 가상 요소를 블록 요소로 선언 (필수) */
-    width: 0;            /* 시작은 0 */
-    height: 3px;         /* 두께 */
-    background-color: #e2012d; /* T1 Red */
-    
-    transition: width 0.3s ease-in-out; 
-    will-change: width;
-    z-index: 10;         /* 다른 요소보다 위에 보이게 */
+	content: "";
+	position: absolute;
+	bottom: -2px; /* 하단 골드 라인과 살짝 겹치거나 바로 위 배치 */
+	left: 50%;
+	transform: translateX(-50%);
+	display: block;
+	width: 0;
+	height: 3px;
+	background-color: #e2012d;
+	transition: width 0.3s ease-in-out;
+	will-change: width;
+	z-index: 10;
 }
 
-/* 호버 시 너비를 100%로 확장 */
 .menu-container a:hover::after {
-    width: 100%;
+	width: 80%; /* 글자 너비에 맞춰 적절히 조절 */
+}
+
+/* --- [차별화 스타일] --- */
+
+/* 1. 홈(Home) 버튼: T1 Red 꽉 찬 스타일 */
+.menu-container td:first-child {
+	text-align: left; /* 홈은 왼쪽 정렬 */
+}
+
+.menu-container td:first-child a {
+	color: #ffffff !important;
+	font-weight: 900;
+	display: inline-block; /* 꽉 차지 않게 조절 */
+	width: auto;
+	padding: 18px 38px;
+	border-radius: 4px;
+	background: linear-gradient(135deg, #e2012d 0%, #b00024 100%) !important;
+	border : none !important; /* 그라데이션 사용 시 테두리는 없는 게 깔끔합니다 */
+	margin-left: 10px;
+	border: none !important;
+}
+
+.menu-container td:first-child a:hover {
+	background-color: #b00024 !important;
+	box-shadow: 0 4px 12px rgba(226, 1, 45, 0.3);
+}
+
+.menu-container td:first-child a::after {
+	display: none; /* 홈 버튼은 언더라인 제외 */
+}
+
+.menu-container td:last-child a::after {
+	display: none; /* 홈 버튼은 언더라인 제외 */
+}
+
+/* 로그인/회원가입 버튼 그룹 */
+.auth-group {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* 우측 정렬 */
+    gap: 12px; /* 버튼 사이 간격 */
+    height: 100%;
+    padding-right: 15px;
+}
+
+/* 회원가입 버튼 스타일 (텍스트 강조형) */
+.register-link {
+    display: inline-block !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #444 !important;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.register-link:hover {
+    color: #e2012d !important; /* 호버 시 T1 Red */
+}
+
+/* 로그인 버튼 스타일 (기존 Gold 테두리 유지) */
+.login-btn {
+    display: inline-block !important;
+    padding: 8px 18px !important;
+    border: 1.5px solid #c69c6d !important;
+    color: #c69c6d !important;
+    border-radius: 4px;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    transition: all 0.3s ease !important;
+}
+
+.login-btn:hover {
+    background-color: #c69c6d !important;
+    color: #ffffff !important;
+}
+
+/* 두 버튼 모두 하단 언더라인 애니메이션 제외 */
+.register-link::after,
+.login-btn::after {
+    display: none !important;
+}
+
+/* 로그인 정보 컨테이너 (isAuthenticated 영역) */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    height: 100%;
+    padding-right: 15px;
+}
+/* 로그아웃 링크 스타일 (일반 메뉴와 차별화) */
+.logout-link {
+    display: inline-block !important;
+    padding: 5px 12px !important;
+    font-size: 12px !important;
+    color: #888 !important;
+    border: 1px solid #ddd !important;
+    border-radius: 4px;
+    background: #f9f9f9;
+    transition: all 0.2s ease !important;
+}
+
+.logout-link:hover {
+    color: #e2012d !important; /* T1 Red */
+    border-color: #e2012d !important;
+    background: #fff;
+}
+
+/* 로그아웃 링크는 하단 언더라인 애니메이션 제외 */
+.logout-link::after {
+    display: none !important;
+}
+
+/* 사용자 아이디 강조 스타일 */
+.user-id {
+    color: #e2012d !important; /* T1 Red */
+    font-weight: 800;          /* 아이디를 더 돋보이게 두껍게 설정 */
+    margin-right: 2px;         /* '님' 글자와의 미세한 간격 */
+}
+
+/* 기존 사용자 이름 컨테이너 스타일 유지 */
+.user-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #151515; /* '님' 글자는 블랙 유지 */
+}
+
+/* 사용자 정보 컨테이너 (수직 정렬 보정) */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* menu-auth td 자체의 패딩 조정 */
+.menu-auth {
+    text-align: right;
+    padding-right: 15px;
 }
 
 /* 구분선 제거 (메뉴바 자체가 구분선 역할) */
 hr {
-    display: none;
+	display: none;
 }
 
 /* 모든 페이지에서 세로 스크롤바 영역을 항상 확보 (메뉴 쏠림 방지) */
 html {
-    overflow-y: scroll;
+	overflow-y: scroll;
 }
 
 /* 추가로 전체 너비 계산 시 스크롤바 너비를 고려하도록 설정 */
 body {
-    margin: 0;
-    padding: 0;
-    width: 100vw; /* 뷰포트 너비 고정 */
-    overflow-x: hidden; /* 가로 스크롤 방지 */
+	margin: 0;
+	padding: 0;
+	width: 100vw; /* 뷰포트 너비 고정 */
+	overflow-x: hidden; /* 가로 스크롤 방지 */
 }

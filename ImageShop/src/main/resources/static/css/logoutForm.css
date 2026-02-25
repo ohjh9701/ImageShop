@@ -1,0 +1,69 @@
+/* 로그아웃 페이지 전체 배경 */
+.main-wrapper {
+    background-color: #fcfcfc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* 화면 중앙 배치를 위한 높이 */
+    padding: 60px 0;
+}
+
+/* 로그아웃 컨테이너 (카드 스타일) */
+.main-wrapper .container {
+    width: 400px;
+    background: #ffffff;
+    padding: 60px 40px;
+    border-radius: 16px;
+    border-top: 6px solid #1a1a1a; /* 로그아웃은 차분한 T1 Black 포인트 */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+/* 안내 메시지 스타일 */
+.main-wrapper h2 {
+    color: #1a1a1a;
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    line-height: 1.4;
+}
+
+/* 로그아웃 버튼 (강렬한 레드 그라데이션) */
+.main-wrapper button {
+    width: 100%;
+    height: 52px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    cursor: pointer;
+    /* T1 Red 심화 그라데이션 */
+    background: linear-gradient(135deg, #e2012d 0%, #b00024 100%) !important;
+    box-shadow: 0 4px 15px rgba(226, 1, 45, 0.2);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 버튼 호버 효과 */
+.main-wrapper button:hover {
+    background: linear-gradient(135deg, #ff1a4a 0%, #e2012d 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(226, 1, 45, 0.3);
+}
+
+/* '취소'나 '메인으로' 돌아가는 링크를 추가할 경우를 대비한 스타일 */
+.main-wrapper .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #888;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.main-wrapper .back-link:hover {
+    color: #1a1a1a;
+}
