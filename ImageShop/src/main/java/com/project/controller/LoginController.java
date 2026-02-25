@@ -17,10 +17,10 @@ public class LoginController {
 		log.info("error: " + error);
 		log.info("logout: " + logout);
 		if (error != null) {
-			model.addAttribute("error", "로그인 에러!!!");
+			model.addAttribute("error", "아래 정보를 반드시 입력한 후 로그인 해주세요.");
 		}
 		if (logout != null) {
-			model.addAttribute("logout", "로그아웃!!!");
+			model.addAttribute("logout", "로그아웃을 진행합니다.");
 		}
 		return "auth/loginForm";
 	}
