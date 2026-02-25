@@ -19,6 +19,8 @@ import com.project.service.CodeService;
 import com.project.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Controller
@@ -46,7 +48,8 @@ public class MemberController {
 
 	// 등록 처리
 	@PostMapping("/register")
-	public String register(@Validated Member member, BindingResult result, Model model, RedirectAttributes rttr) throws Exception {
+	public String register(@Validated Member member, BindingResult result, Model model, RedirectAttributes rttr)
+			throws Exception {
 		if (result.hasErrors()) {
 			// 직업코드 목록을 조회하여 뷰에 전달
 			String groupCode = "A00";
@@ -57,10 +60,10 @@ public class MemberController {
 		// 비밀번호 암호화
 		String inputPassword = member.getUserPw();
 		member.setUserPw(passwordEncoder.encode(inputPassword));
-		
+
 		int count = service.register(member);
-		
-		if(count != 0) {
+
+		if (count != 0) {
 			rttr.addFlashAttribute("userName", member.getUserName());
 			return "redirect:/user/registerSuccess";
 		} else {
@@ -68,14 +71,54 @@ public class MemberController {
 			return "redirect:/user/registerFailed";
 		}
 	}
-	
+
 	// 등록 성공 페이지
 	@GetMapping("/registerSuccess")
 	public void registerSuccess(Model model) throws Exception {
 	}
+
 	// 등록 실패 페이지
 	@GetMapping("/registerFailed")
 	public void registerFailed(Model model) throws Exception {
+	}
+
+	@GetMapping("/list")
+	public void list(Model model) throws Exception {
+		model.addAttribute("list", service.list());
+	}
+
+	@GetMapping("/detail")
+	public void userDetail(Member member, Model model) throws Exception {
+		String groupCode = "A00";
+		List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
+
+		model.addAttribute("jobList", jobList);
+		model.addAttribute(service.read(member));
+	}
+
+	@GetMapping("/modify")
+	public void modifyForm(Member member, Model model) throws Exception {
+		String groupCode = "A00";
+		List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
+
+		model.addAttribute("jobList", jobList);
+		model.addAttribute(service.read(member));
+	}
+
+	@PostMapping("/modify")
+	public String modify(Member member, RedirectAttributes rttr) throws Exception {
+		// 비밀번호 암호화
+		String inputPassword = member.getUserPw();
+		member.setUserPw(passwordEncoder.encode(inputPassword));
+
+		int count = service.modify(member);
+
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			rttr.addFlashAttribute("msg", "FAIL");
+		}
+		return "redirect:/user/list";
 	}
 
 }

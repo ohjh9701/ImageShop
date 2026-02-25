@@ -1,6 +1,6 @@
-/* 오직 컨테이너 내부만 스타일링 */
+/* 컨테이너 스타일 */
 .container {
-    width: 1100px;
+    width: 1100px; /* 리스트는 데이터가 많으므로 넓게 설정 */
     margin: 40px auto;
     padding: 30px;
     background: #fff;
@@ -9,33 +9,35 @@
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
+/* 제목 스타일 */
 .container h2 {
     color: #1a1a1a;
-    font-size: 24px;
-    margin-bottom: 25px;
+    font-size: 26px;
     font-weight: 800;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
 }
 
-/* 신규 등록 버튼 (우측 상단 배치) */
-.container a[href="register"] {
+/* 등록 버튼 (Action New) */
+.container a[href="/user/register"] {
     display: inline-block;
-    float: right;
-    background-color: #e2012d;
-    color: #fff !important;
-    padding: 8px 16px;
-    border-radius: 4px;
+    padding: 10px 20px;
+    background-color: #c69c6d; /* T1 Gold */
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 15px;
-    transition: background 0.2s;
+    font-weight: 700;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    float: right; /* 우측 상단 배치 */
+    transition: all 0.2s ease;
 }
 
-.container a[href="register"]:hover {
-    background-color: #b00024;
+.container a[href="/user/register"]:hover {
+    background-color: #1a1a1a; /* 호버 시 블랙 */
+    transform: translateY(-2px);
 }
 
-/* 테이블 스타일: JSP의 border="1"을 덮어쓰기 위해 구체적으로 지정 */
 .container table {
     width: 100%;
     border-collapse: collapse !important;
@@ -84,9 +86,22 @@
     text-decoration: underline;
 }
 
-/* 데이터 없음 메시지 */
-.container td[colspan="3"] {
+.container td:nth-child(3) {
+    font-size: 13px;
+    color: #999;           /* 색상을 연하게 하여 부차적인 정보임을 표시 */
+    letter-spacing: 1px;   /* 글자 간격을 넓혀 암호화된 느낌 강조 */
+    word-break: break-all; /* 긴 암호문이 영역을 벗어나지 않게 처리 */
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: 0.7;          /* 전체적인 선명도를 낮춰 시선 분산 방지 */
+}
+
+/* 리스트가 비어있을 때 */
+.container td[colspan="6"] {
+    padding: 50px 0;
     text-align: center;
-    padding: 40px 0;
-    color: #999;
+    color: #bbb;
+    font-style: italic;
 }

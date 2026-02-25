@@ -138,50 +138,57 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* 2. 메뉴 컨테이너 (여기가 핵심!) */
+/* 2. 메뉴 컨테이너 (구조적 안정성 강화) */
 .menu-container {
-    background-color: #151515; /* 더 진한 블랙 */
+    background-color: #151515;
     width: 100%;
-    height: 70px; /* 메뉴바 높이 확장 */
+    height: 70px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-top: 1px solid #333;
-    border-bottom: 2px solid #c69c6d; /* 하단 골드 포인트 라인 */
+    border-bottom: 2px solid #c69c6d;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    /* 폰트 렌더링 최적화 서브픽셀 방지 */
+    font-variant-numeric: tabular-nums; 
 }
 
-/* 테이블 구조 제거 느낌으로 스타일링 */
 .menu-container table {
-    width: 800px; /* 메뉴바 너비 */
-    margin: 0 !important;
+    width: 1100px; /* 여유 있게 조정 */
+    margin: 0 auto !important;
     border-collapse: collapse;
+    table-layout: fixed; /* ★ 각 셀의 너비를 고정하여 글자 쏠림 방지 */
 }
 
-.menu-container td {
-    text-align: center;
-    padding: 0;
-}
-
-/* 메뉴 링크 스타일 */
+/* 메뉴 링크 스타일 (선명도 극대화) */
 .menu-container a {
     display: block;
-    color: #ffffff; /* 기본 화이트 */
+    color: #ffffff;
     font-size: 16px;
     font-weight: 600;
-    letter-spacing: 1.5px;
-    padding: 22px 0; /* 높이에 맞춘 패딩 */
-    transition: all 0.3s ease;
-    position: relative;
+    letter-spacing: 0.5px; /* 자간을 너무 넓히면 렌더링이 튈 수 있음 */
+    padding: 22px 0;
+    text-align: center;
+    text-decoration: none;
+    
+    /* 폰트 깨짐 방지 핵심 속성 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0); 
+    backface-visibility: hidden;
+    perspective: 1000px;
+    filter: blur(0); /* 브라우저의 미세한 블러 제거 */
+    
+    transition: color 0.3s ease; /* 전체 transition보다 특정 속성만 지정하는 게 안정적 */
 }
 
-/* 메뉴 호버 효과 (골드 포인트) */
+/* 호버 효과에서 레이아웃에 영향을 주는 속성 최소화 */
 .menu-container a:hover {
-    color: #c69c6d; /* T1 Gold */
-    background-color: rgba(255, 255, 255, 0.05); /* 미세한 배경 변화 */
+    color: #c69c6d;
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
-/* 호버 시 하단에 밑줄 애니메이션 */
+/* 언더라인 애니메이션 (글자 흔들림 방지 처리) */
 .menu-container a::after {
     content: "";
     position: absolute;
@@ -189,13 +196,10 @@ body {
     left: 50%;
     width: 0;
     height: 3px;
-    background-color: #e2012d; /* T1 Red 언더라인 */
-    transition: all 0.3s ease;
+    background-color: #e2012d;
+    transition: width 0.3s ease; /* transform 대신 width 사용 시 더 안정적일 수 있음 */
     transform: translateX(-50%);
-}
-
-.menu-container a:hover::after {
-    width: 100%;
+    will-change: width;
 }
 
 /* 구분선 제거 (메뉴바 자체가 구분선 역할) */
