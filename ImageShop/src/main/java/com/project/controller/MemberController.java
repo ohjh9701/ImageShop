@@ -19,8 +19,6 @@ import com.project.service.CodeService;
 import com.project.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Slf4j
 @Controller
@@ -120,7 +118,7 @@ public class MemberController {
 		}
 		return "redirect:/user/list";
 	}
-	
+
 	@GetMapping("/remove")
 	public String getMethodName(Member member, RedirectAttributes rttr) throws Exception {
 		int count = service.remove(member);
@@ -132,6 +130,41 @@ public class MemberController {
 		}
 		return "redirect:/user/list";
 	}
-	
+
+	/* 관리자 생성하는 로직 */
+
+	// 최초 관리자를 생성하는 화면을 반환한다.
+	@GetMapping("/setup")
+	public String setupAdminForm(Member member, Model model) throws Exception {
+		// 회원 테이블 데이터 건수를 확인하여 최초 관리자 등록 페이지를 표시한다.
+		if (service.countAll() == 0) {
+			return "user/setup";
+		}
+		return "user/setupFailure";
+	}
+
+	@PostMapping("/setup")
+	public String setupAdmin(Member member, RedirectAttributes rttr) throws Exception {
+		if (service.countAll() == 0) {
+			String inputPassword = member.getUserPw();
+			member.setUserPw(passwordEncoder.encode(inputPassword));
+			
+			member.setJob("00");
+			
+			int count = service.setupAdmin(member);
+			
+			if (count != 0) {
+				rttr.addFlashAttribute("userName", member.getUserName());
+				rttr.addFlashAttribute("msg", "SUCCESS");
+				return "redirect:/user/registerSuccess";
+			} else {
+				rttr.addFlashAttribute("userName", member.getUserName());
+				rttr.addFlashAttribute("msg", "FAIL");
+				return "redirect:/user/registerFailed";
+			}
+		}
+		// 회원 테이블에 데이터가 존재하면 최초 관리자를 생성할 수 없으므로 실패 페이지로 이동한다.
+		return "redirect:/user/setupFailure";
+	}
 
 }

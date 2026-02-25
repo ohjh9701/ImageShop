@@ -42,6 +42,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public int modify(Member member) throws Exception {
 
 		int count = mapper.update(member);
@@ -71,10 +72,35 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public int remove(Member member) throws Exception {
 		// 회원권한 삭제
 		mapper.deleteAuth(member.getUserNo());
 		
 		return mapper.delete(member);
+	}
+	
+	/* 관리자 생성 로직 */
+
+	@Override
+	public int countAll() throws Exception {
+		return mapper.countAll();
+	}
+
+	@Override
+	@Transactional
+	public int setupAdmin(Member member) throws Exception {
+		int count = mapper.create(member);
+
+		if (count != 0) {
+			// 회원 권한 생성
+			MemberAuth memberAuth = new MemberAuth();
+			memberAuth.setUserNo(member.getUserNo());
+			memberAuth.setAuth("ROLE_ADMIN");
+			
+			mapper.createAuth(memberAuth);
+		}
+
+		return count;
 	}
 }
