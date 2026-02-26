@@ -19,7 +19,7 @@
 }
 
 /* 신규 등록 버튼 (우측 상단 배치) */
-.container a[href="register"] {
+.container a[href="/board/register"] {
     display: inline-block;
     float: right;
     background-color: #e2012d;
@@ -32,7 +32,7 @@
     margin-bottom: 15px;
 }
 
-.container a[href="register"]:hover {
+.container a[href="/board/register"]:hover {
      background-color: #1a1a1a; /* 호버 시 블랙 */
 }
 
@@ -86,7 +86,7 @@
 }
 
 /* 데이터 없음 메시지 */
-.container td[colspan="3"] {
+.container td[colspan="4"] {
     text-align: center;
     padding: 40px 0;
     color: #999;

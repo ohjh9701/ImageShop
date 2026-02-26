@@ -43,7 +43,8 @@
 }
 
 /* 입력창 및 셀렉트박스 */
-.main-wrapper input[type="text"] {
+.main-wrapper input[type="text"],
+.main-wrapper textarea {
     width: 100%;
     padding: 14px 18px;
     background-color: #fff;

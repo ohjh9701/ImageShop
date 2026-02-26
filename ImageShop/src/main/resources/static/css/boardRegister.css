@@ -1,0 +1,144 @@
+
+/* 2. 컨테이너: 상자 형태를 제거하고 너비만 조절 */
+.container {
+    width: 1100px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    border-top: 4px solid #e2012d; /* T1 Red */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* 3. 제목 스타일: 왼쪽 정렬로 변경 (커뮤니티 국룰) */
+/* 1. 제목 영역 (아이콘과 보조 텍스트 활용 느낌) */
+.container h2 {
+    color: #1a1a1a;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 16px; /* hr과의 간격을 좁히고 */
+    letter-spacing: -1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 제목 앞에 T1 레드 포인트 사각형 추가 */
+.container h2::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 24px;
+    background-color: #e2012d; /* T1 Red */
+    border-radius: 2px;
+}
+
+/* 2. 구분선 (강렬한 그라데이션 포인트) */
+.container .title-hr {
+    border: 0;
+    height: 3px;
+    /* 왼쪽은 진한 T1 Red, 오른쪽은 투명하게 사라지는 느낌 */
+    background: linear-gradient(to right, #e2012d 0%, #c69c6d 50%, transparent 100%);
+    margin: 0 0 30px 0;
+    border-radius: 2px;
+}
+
+/* 3. (선택사항) 제목 우측에 보조 문구 추가 스타일 */
+.container h2 span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #888;
+    margin-left: 5px;
+    letter-spacing: 0;
+}
+
+/* 4. 테이블 레이아웃 정리 */
+.container table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff; /* 입력 영역만 흰색 배경으로 포인트 */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.container td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e9e9e9; /* 행 간의 아주 연한 구분선 */
+}
+
+/* 라벨 영역 */
+.container td:first-child {
+    width: 140px;
+    background-color: #f9f9f9; /* 라벨 영역만 살짝 어둡게 */
+    font-weight: 700;
+    color: #555;
+    vertical-align: middle;
+}
+
+/* 5. 입력창 디자인 (에펨코리아 느낌) */
+.container input[type="text"],
+.container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+/* Readonly 작성자 칸 */
+.container input[readonly] {
+    background-color: #eee;
+    border-color: #ddd;
+    color: #777;
+}
+
+/* 본문 영역 */
+.container textarea {
+    height: 450px;
+    line-height: 1.6;
+    resize: none; /* 커뮤니티처럼 고정된 느낌 */
+}
+
+/* 포커스 시 T1 Red 포인트 */
+.container input:focus,
+.container textarea:focus {
+    outline: none;
+    border-color: #e2012d; /* 포커스 시 T1 레드 선 */
+}
+
+/* 6. 하단 버튼 영역 */
+.container div:has(> button) {
+    display: flex;
+    justify-content: center; /* 버튼을 우측으로 정렬 */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.container button {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+/* 등록 버튼: T1 Red */
+#btnRegister {
+    background-color: #e2012d;
+    color: #fff;
+}
+
+/* 목록 버튼: 연한 회색 */
+#btnList {
+    background-color: #888;
+    color: #fff;
+}
+
+#btnRegister:hover { background-color: #b00024; }
+#btnList:hover { background-color: #666; }

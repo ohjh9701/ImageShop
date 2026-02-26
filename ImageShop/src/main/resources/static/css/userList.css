@@ -31,12 +31,10 @@
     font-weight: bold;
     font-size: 13px;
     margin-bottom: 15px;
-    transition: background 0.2s;
 }
 
 .container a[href="/user/register"]:hover {
     background-color: #1a1a1a; /* 호버 시 블랙 */
-    transform: translateY(-2px);
 }
 
 .container table {

@@ -20,7 +20,7 @@
 		<h2>
 			<spring:message code="user.header.list" />
 		</h2>
-		<a href="/user/register"><spring:message code="action.new" /></a>
+		<a href="/user/register">회원등록</a>
 		<table border="1">
 			<tr>
 				<th align="center" width="60"><spring:message code="user.no" /></th>

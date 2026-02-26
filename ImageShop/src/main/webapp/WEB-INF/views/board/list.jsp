@@ -4,12 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>T1 Code Detail List</title>
-<link rel="stylesheet" href="/css/list.css">
+<title>Code Group List</title>
+<link rel="stylesheet" href="/css/boardList.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -18,44 +19,47 @@
 	<!-- 메인화면 작업 영역 시작 -->
 	<div class="container">
 		<h2>
-			<spring:message code="codedetail.header.list" />
+			<spring:message code="board.header.list" />
 		</h2>
-		<a href="register">코드등록</a>
-		<table border="1" class="codedetail_table">
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<a href="/board/register">글쓰기</a>
+		</sec:authorize>
+		<sec:authorize access="hasRole('ROLE_MEMBER')">
+			<a href="/board/register">글쓰기</a>
+		</sec:authorize>
+		
+		<table border="1">
 			<tr>
-				<th align="center" width="160"><spring:message
-						code="codedetail.groupCode" /></th>
-				<th align="center" width="160"><spring:message
-						code="codedetail.codeValue" /></th>
-				<th align="center" width="160"><spring:message
-						code="codedetail.codeName" /></th>
-				<th align="center" width="160"><spring:message
-						code="codedetail.sortSeq" /></th>
+				<th align="center" width="80"><spring:message code="board.no" /></th>
+				<th align="center" width="320"><spring:message
+						code="board.title" /></th>
+				<th align="center" width="100"><spring:message
+						code="board.writer" /></th>
 				<th align="center" width="180"><spring:message
-						code="codedetail.regdate" /></th>
+						code="board.regdate" /></th>
+
 			</tr>
 			<c:choose>
 				<c:when test="${empty list}">
 					<tr>
-						<td colspan="5"><spring:message code="common.listEmpty" /></td>
+						<td colspan="4"><spring:message code="common.listEmpty" /></td>
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${list}" var="codeDetail">
+					<c:forEach items="${list}" var="board">
 						<tr>
-							<td align="center">${codeDetail.groupCode}</td>
-							<td align="center">${codeDetail.codeValue}</td>
-							<td align="left"><a
-								href="/codedetail/detail?groupCode=${codeDetail.groupCode}&codeValue=${codeDetail.codeValue}">${codeDetail.codeName}</a>
-							</td>
-							<td align="center">${codeDetail.sortSeq}</td>
+							<td align="center">${board.boardNo}</td>
+							<td align="center"><a
+								href='/board/detail?boardNo=${board.boardNo}'>${board.title}</a></td>
+							<td align="center">${board.writer}</td>
 							<td align="center"><fmt:formatDate
-									pattern="yyyy-MM-dd HH:mm" value="${codeDetail.regDate}" /></td>
+									pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" /></td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
 		</table>
+
 	</div>
 
 

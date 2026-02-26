@@ -3,14 +3,23 @@
 <mapper namespace="com.project.mapper.BoardMapper">
 
 	<!-- 등록 -->
-
+	<insert id="create">
+		INSERT INTO board (board_no, title, content, writer)
+		VALUES (board_seq.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
 	<!-- 리스트 조회 -->
-
+	<select id="list">
+		<![CDATA[
+			SELECT board_no, title, content, writer, reg_date FROM board WHERE board_no > 0 ORDER BY board_no DESC, reg_date DESC 
+		]]>
+	</select>
 	<!-- 상세 조회 -->
-
+	<select id="read">
+		SELECT board_no, title, content, writer, reg_date FROM board WHERE board_no = #{boardNo}
+	</select>
 	<!-- 수정 -->
 
 	<!-- 삭제 -->
 
 
-</mapper>
+</mapper> 
