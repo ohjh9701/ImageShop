@@ -17,7 +17,8 @@ public interface BoardMapper {
 
 	//게시판 수정
 	public int update(Board board) throws Exception;
-	
+
 	//게시판 삭제
+	public int delete(Board board) throws Exception;
 	
 }

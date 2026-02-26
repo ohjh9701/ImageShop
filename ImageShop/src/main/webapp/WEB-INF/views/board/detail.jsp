@@ -92,7 +92,7 @@
 			$("#btnRemove").on("click", function() {
 				let boardNo = $("#boardNo");
 				let boardNoValue = boardNo.val();
-				self.location = "delete?boardNo=" + boardNoValue;
+				self.location = "remove?boardNo=" + boardNoValue;
 			});
 			$("#btnList").on("click", function() {
 				self.location = "list";

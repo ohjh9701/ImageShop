@@ -73,9 +73,18 @@ public class BoardController {
 		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		}
-		return "redirect:/board/detail?boardNo="+board.getBoardNo();
+		return "redirect:/board/list";
 	}
 	
+	@GetMapping("/remove")
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+	public String remove(Board board, RedirectAttributes rttr) throws Exception {
+		int count = service.remove(board);
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		}
+		return "redirect:/board/list";
+	}
 	
 
 }

@@ -18,8 +18,10 @@ public interface BoardService {
 
 	//게시판 수정
 	public int modify(Board board) throws Exception;
-	
-	
+
 	//게시판 삭제
+	public int remove(Board board) throws Exception;
+	
+	
 	
 }

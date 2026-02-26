@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Member Modify</title>
+<title>Board Modify</title>
 <link rel="stylesheet" href="/css/boardRegister.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

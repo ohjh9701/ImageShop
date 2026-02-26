@@ -22,6 +22,8 @@
 		UPDATE board SET title = #{title}, content = #{content} WHERE board_no = #{boardNo}
 	</update>
 	<!-- 삭제 -->
-
+	<delete id="delete">
+		DELETE FROM board WHERE board_no = #{boardNo}
+	</delete>
 
 </mapper> 
