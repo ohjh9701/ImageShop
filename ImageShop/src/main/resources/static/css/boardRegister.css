@@ -134,6 +134,12 @@
     color: #fff;
 }
 
+/* 수정 버튼: T1 Red */
+#btnModify {
+    background-color: #e2012d;
+    color: #fff;
+}
+
 /* 목록 버튼: 연한 회색 */
 #btnList {
     background-color: #888;
@@ -141,4 +147,5 @@
 }
 
 #btnRegister:hover { background-color: #b00024; }
+#btnModify:hover { background-color: #b00024; }
 #btnList:hover { background-color: #666; }

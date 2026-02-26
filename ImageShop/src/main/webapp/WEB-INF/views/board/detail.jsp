@@ -90,9 +90,9 @@
 				self.location = "modify?boardNo=" + boardNoValue;
 			});
 			$("#btnRemove").on("click", function() {
-				formObj.attr("action", "/board/remove");
-				formObj.attr("method", "get");
-				formObj.submit();
+				let boardNo = $("#boardNo");
+				let boardNoValue = boardNo.val();
+				self.location = "delete?boardNo=" + boardNoValue;
 			});
 			$("#btnList").on("click", function() {
 				self.location = "list";

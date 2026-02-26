@@ -21,9 +21,6 @@
 		<h2>
 			<spring:message code="board.header.list" />
 		</h2>
-		<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<a href="/board/register">글쓰기</a>
-		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_MEMBER')">
 			<a href="/board/register">글쓰기</a>
 		</sec:authorize>

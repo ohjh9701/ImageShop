@@ -29,7 +29,7 @@ public class BoardController {
 	private BoardService service;
 
 	@GetMapping("/register")
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	public void getMethodName(Model model, Authentication authentication) throws Exception {
 		// 로그인한 사용자 정보 획득
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
@@ -60,6 +60,22 @@ public class BoardController {
 	public void detail(Board board, Model model) throws Exception {
 		model.addAttribute(service.read(board));
 	}
+	
+	@GetMapping("/modify")
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+	public void modifyForm(Board board, Model model) throws Exception {
+		model.addAttribute(service.read(board));
+	}
+	
+	@PostMapping("/modify")
+	public String modify(Board board, RedirectAttributes rttr) throws Exception {
+		int count = service.modify(board);
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		}
+		return "redirect:/board/detail?boardNo="+board.getBoardNo();
+	}
+	
 	
 
 }

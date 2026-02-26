@@ -18,7 +18,9 @@
 		SELECT board_no, title, content, writer, reg_date FROM board WHERE board_no = #{boardNo}
 	</select>
 	<!-- 수정 -->
-
+	<update id="update">
+		UPDATE board SET title = #{title}, content = #{content} WHERE board_no = #{boardNo}
+	</update>
 	<!-- 삭제 -->
 
 
