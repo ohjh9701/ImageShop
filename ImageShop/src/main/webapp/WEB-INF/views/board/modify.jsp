@@ -21,6 +21,10 @@
 		<h2>T1 커뮤니티</h2>
 		<form:form modelAttribute="board" method="post">
 			<form:hidden path="boardNo" />
+			<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
+			<input type="hidden" id="page" name="page" value="${pgrq.page}">
+			<input type="hidden" id="sizePerPage" name="sizePerPage"
+				value="${pgrq.sizePerPage}">
 			<table>
 					<tr>
 						<td><spring:message code="board.title" /></td>
@@ -78,7 +82,9 @@
 				formObj.submit();
 			});
 			$("#btnList").on("click", function() {
-				self.location = "list";
+				let page = $("#page").val();
+				let sizePerPage = $("#sizePerPage").val();
+				self.location = "list?page=" + page + "&sizePerPage=" + sizePerPage;
 			});
 		});
 	</script>

@@ -7,23 +7,44 @@
 		INSERT INTO board (board_no, title, content, writer)
 		VALUES (board_seq.NEXTVAL, #{title}, #{content}, #{writer})
 	</insert>
-	<!-- 리스트 조회 -->
-	<select id="list">
-		<![CDATA[
-			SELECT board_no, title, content, writer, reg_date FROM board WHERE board_no > 0 ORDER BY board_no DESC, reg_date DESC 
-		]]>
-	</select>
+	<!-- 리스트 조회 <select id="list"> <![CDATA[ SELECT board_no, title, content, 
+		writer, reg_date FROM board WHERE board_no > 0 ORDER BY board_no DESC, reg_date 
+		DESC ]]> </select> -->
 	<!-- 상세 조회 -->
 	<select id="read">
-		SELECT board_no, title, content, writer, reg_date FROM board WHERE board_no = #{boardNo}
+		SELECT board_no, title, content, writer, reg_date
+		FROM board WHERE board_no = #{boardNo}
 	</select>
 	<!-- 수정 -->
 	<update id="update">
-		UPDATE board SET title = #{title}, content = #{content} WHERE board_no = #{boardNo}
+		UPDATE board SET title = #{title}, content =
+		#{content} WHERE board_no = #{boardNo}
 	</update>
 	<!-- 삭제 -->
 	<delete id="delete">
 		DELETE FROM board WHERE board_no = #{boardNo}
 	</delete>
 
+
+	<!-- 페이징 카운트 -->
+	<select id="count">
+		<![CDATA[ SELECT count(board_no) FROM board WHERE board_no > 0 ]]>
+	</select>
+
+	<!-- 현재 페이지 리스트 출력 -->
+	<select id="list" resultType="board">
+		<![CDATA[
+			SELECT board_no, title, content, writer, reg_date
+			FROM (
+    			SELECT board_no, title, content, writer, reg_date, ROWNUM as rnum 
+    			FROM (
+        			SELECT board_no, title, content, writer, reg_date 
+        			FROM board 
+        			ORDER BY board_no DESC
+    			)
+    			WHERE ROWNUM <= #{sizePerPage}*#{page}
+			)
+			WHERE rnum >= (#{page} * #{sizePerPage}) - (#{sizePerPage} - 1)
+		]]>
+	</select>
 </mapper> 

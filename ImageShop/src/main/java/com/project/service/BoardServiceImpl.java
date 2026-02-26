@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.common.domain.PageRequest;
 import com.project.domain.Board;
 import com.project.mapper.BoardMapper;
 
@@ -21,10 +22,10 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.create(board);
 	}
 
-	@Override
-	public List<Board> list() throws Exception {
-		return mapper.list();
-	}
+//	@Override
+//	public List<Board> list() throws Exception {
+//		return mapper.list();
+//	}
 
 	@Override
 	public Board read(Board board) throws Exception {
@@ -41,5 +42,16 @@ public class BoardServiceImpl implements BoardService {
 	@Transactional
 	public int remove(Board board) throws Exception {
 		return mapper.delete(board);
+	}
+	
+	//페이징 기능을 위한 카운트
+	@Override
+	public int count() throws Exception {
+		return mapper.count();
+	}
+
+	@Override
+	public List<Board> list(PageRequest pageRequest) throws Exception {
+		return mapper.list(pageRequest);
 	}
 }
