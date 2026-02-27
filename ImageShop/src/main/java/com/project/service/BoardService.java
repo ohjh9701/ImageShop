@@ -24,9 +24,11 @@ public interface BoardService {
 	public int remove(Board board) throws Exception;
 	
 	//페이징 카운트
-	public int count() throws Exception;
+	//public int count() throws Exception;
 	
 	//현재 페이지의 리스트 출력
 	public List<Board> list(PageRequest pageRequest) throws Exception;
+
+	public int count(PageRequest pageRequest) throws Exception;
 	
 }

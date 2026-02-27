@@ -45,13 +45,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	//페이징 기능을 위한 카운트
-	@Override
-	public int count() throws Exception {
-		return mapper.count();
-	}
+//	@Override
+//	public int count() throws Exception {
+//		return mapper.count();
+//	}
 
 	@Override
 	public List<Board> list(PageRequest pageRequest) throws Exception {
 		return mapper.list(pageRequest);
+	}
+
+	@Override
+	public int count(PageRequest pageRequest) throws Exception {
+		return mapper.count(pageRequest);
 	}
 }

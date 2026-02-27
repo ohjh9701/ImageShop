@@ -23,12 +23,28 @@
 			<spring:message code="board.header.list" />
 		</h2>
 
-		<div class="list-card">
+		<!-- 검색 폼을 만든다. -->
+		<div class="list_top_menu">
+		<form:form modelAttribute="pgrq" method="get"
+			action="list${pgrq.toUriStringByPage(pgrq.page)}">
+			<div class="search-bar">
+			<form:select path="searchType" items="${searchTypeCodeValueList}"
+				itemValue="value" itemLabel="label" />
+			<form:input path="keyword" />
+			<button id='searchBtn'>
+				<spring:message code="action.search" />
+			</button>
+			</div>
 			<div class="list-ctrl-bar">
+				<a href="/board/list${pgrq.toUriStringByPage(pgrq.page)}" class="list_back">리스트 돌아가기</a>
 				<sec:authorize access="hasRole('ROLE_MEMBER')">
 					<a href="/board/register">새 글 작성</a>
 				</sec:authorize>
 			</div>
+		</form:form>
+		</div>
+
+		<div class="list-card">
 
 			<table border="1">
 				<tr>
@@ -53,8 +69,8 @@
 								<td align="center">${board.boardNo}</td>
 
 								<td align="left"><a
-									href="/board/detail${pagination.makeQuery(pagination.pageRequest.page)}&boardNo=${board.boardNo}">${board.title}</a>
-								</td>
+									href="/board/detail${pgrq.toUriString(pgrq.page)}&boardNo=${board.boardNo}">
+									<c:out value="${board.title}" /></a></td>
 
 								<td align="center">${board.writer}</td>
 								<td align="center"><fmt:formatDate

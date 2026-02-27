@@ -2,6 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.BoardMapper">
 
+	<!-- 검색 조건을 나타내는 쿼리 조각 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND title LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND content LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+			</if>
+			<if test="searchType == 'w'.toString()">
+				AND writer LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND (title LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+				OR
+				content LIKE CONCAT('%', CONCAT(#{keyword}, '%')))
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				AND (content LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+				OR
+				writer LIKE CONCAT('%',CONCAT( #{keyword}, '%')))
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				AND (title LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+				OR
+				content LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+				OR writer LIKE
+				CONCAT('%', CONCAT(#{keyword}, '%')))
+			</if>
+		</if>
+	</sql>
+	<sql id="total_list">
+		<if test="searchType == null">
+			and rnum between #{sizePerPage}*#{page}-9 and
+			#{sizePerPage}*#{page}
+		</if>
+	</sql>
+
 	<!-- 등록 -->
 	<insert id="create">
 		INSERT INTO board (board_no, title, content, writer)
@@ -26,25 +64,33 @@
 	</delete>
 
 
-	<!-- 페이징 카운트 -->
+	<!-- 
+	페이징 카운트 
 	<select id="count">
 		<![CDATA[ SELECT count(board_no) FROM board WHERE board_no > 0 ]]>
 	</select>
+	-->
+	<!-- 게시글 전체 건수를 조회한다. -->
+	<!-- 검색 조건을 추가한다. -->
+	<select id="count" resultType="int">
+		<![CDATA[ SELECT count(board_no) FROM board WHERE board_no > 0 ]]>
+		<include refid="search"></include>
+	</select>
+
 
 	<!-- 현재 페이지 리스트 출력 -->
 	<select id="list" resultType="board">
-		<![CDATA[
-			SELECT board_no, title, content, writer, reg_date
-			FROM (
-    			SELECT board_no, title, content, writer, reg_date, ROWNUM as rnum 
-    			FROM (
-        			SELECT board_no, title, content, writer, reg_date 
-        			FROM board 
-        			ORDER BY board_no DESC
-    			)
-    			WHERE ROWNUM <= #{sizePerPage}*#{page}
-			)
-			WHERE rnum >= (#{page} * #{sizePerPage}) - (#{sizePerPage} - 1)
-		]]>
-	</select>
+    SELECT board_no, title, content, writer, reg_date
+    FROM (
+        SELECT board_no, title, content, writer, reg_date, ROWNUM as rnum 
+        FROM (
+            SELECT board_no, title, content, writer, reg_date 
+            FROM board 
+            WHERE board_no > 0
+            <include refid="search"></include> ORDER BY board_no DESC
+        )
+        WHERE ROWNUM &lt;= #{page} * #{sizePerPage}
+    )
+    WHERE rnum &gt;= (#{page} * #{sizePerPage}) - (#{sizePerPage} - 1)
+</select>
 </mapper> 

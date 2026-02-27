@@ -73,8 +73,12 @@ public class Pagination {
 
 	// 만약 this.page = 3, this.sizePerPage = 20 이면=> "?page=3&sizePerPage=20"
 	public String makeQuery(int page) {
-		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page)
-				.queryParam("sizePerPage", pageRequest.getSizePerPage()).build();
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("sizePerPage", pageRequest.getSizePerPage())
+				.queryParam("searchType", pageRequest.getSearchType())
+				.queryParam("keyword", pageRequest.getKeyword())
+				.build();
 		return uriComponents.toUriString();
 	}
 

@@ -18,23 +18,15 @@
     text-transform: uppercase;
 }
 
-/* 등록 버튼: 기존 스타일 고수 */
-.container a[href="/board/register"] {
-    display: inline-block;
-    float: right;
-    background-color: #e2012d;
-    color: #fff !important;
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 15px;
-}
 
+
+.container a.list_back:hover {
+    background-color: #1a1a1a;
+}
 .container a[href="/board/register"]:hover {
     background-color: #1a1a1a;
 }
+
 
 /* 테이블: 기존의 다크 헤더 스타일 유지 */
 .container table {
@@ -106,4 +98,100 @@
 .pagination-container .nav-arrow {
     color: #c69c6d;
     font-size: 16px;
+}
+
+
+/* 검색 폼 컨테이너 */
+.container form[id="pgrq"] {
+	width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 20px;
+    float: left; /* 새 글 작성 버튼(float:right)과 대칭 배치 */
+}
+
+/* 셀렉트 박스 (SearchType) */
+.container select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.container select:focus {
+    border-color: #c69c6d; /* T1 Gold */
+}
+
+/* 키워드 입력창 (Keyword) */
+.container input[id="keyword"] {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+    outline: none;
+    transition: all 0.2s;
+    margin-right: 10px;
+}
+
+.container input[id="keyword"]:focus {
+    border-color: #e2012d; /* T1 Red */
+    box-shadow: 0 0 0 2px rgba(226, 1, 45, 0.1);
+}
+
+/* 검색 버튼 */
+#searchBtn {
+    background-color: #1a1a1a; /* T1 Black */
+    color: #c69c6d; /* T1 Gold */
+    border: 1px solid #1a1a1a;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* 등록 버튼: 기존 스타일 고수 */
+.container a[href="/board/register"] {
+    display: inline-block;
+    float: right;
+    background-color: #e2012d;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+}
+/* 등록 버튼: 기존 스타일 고수 */
+.container a.list_back {
+    display: inline-block;
+    float: right;
+    background-color: #c69c6d;
+    color: #fff !important;
+    padding: 8px 18px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+#searchBtn:hover {
+    background-color: #c69c6d;
+    color: #ffffff;
+    border-color: #c69c6d;
+}
+
+.container .list-ctrl-bar {
+	display: flex;
+    align-items: center;
+    gap: 10px;
 }
