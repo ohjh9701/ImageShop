@@ -20,8 +20,8 @@
 	<!-- 메인화면 작업 영역 시작 -->
 	<div class="container">
 		<h2>T1 커뮤니티</h2>
-		<form:form modelAttribute="board">
-			<form:hidden path="boardNo" />
+		<form:form modelAttribute="notice">
+			<form:hidden path="noticeNo" />
 			<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
 			<input type="hidden" id="searchType" name="searchType" value="${pgrq.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${pgrq.keyword}">
@@ -30,20 +30,19 @@
 				value="${pgrq.sizePerPage}">
 			<table>
 				<tr>
-					<td><spring:message code="board.title" /></td>
+					<td><spring:message code="notice.title" /></td>
 					<td><form:input path="title" readonly="true" /></td>
 					<td align="right" class="reg-date">작성일 : <fmt:formatDate
-							pattern="yyyy-MM-dd HH:mm" value="${board.regDate}" />
+							pattern="yyyy-MM-dd HH:mm" value="${notice.regDate}" />
 					</td>
 					<td><font color="red"><form:errors path="title" /></font></td>
 				</tr>
 				<tr>
-					<td><spring:message code="board.writer" /></td>
-					<td colspan="2"><form:input path="writer" readonly="true" /></td>
-					<td><font color="red"><form:errors path="writer" /></font></td>
+					<td>작성자</td>
+					<td colspan="3">admin[관리자]</td>
 				</tr>
 				<tr>
-					<td><spring:message code="board.content" /></td>
+					<td><spring:message code="notice.content" /></td>
 					<td colspan="2"><form:textarea path="content" readonly="true" /></td>
 					<td><font color="red"><form:errors path="content" /></font></td>
 				</tr>
@@ -51,8 +50,6 @@
 		</form:form>
 
 		<div>
-			<!-- 로그인(인가)된 정보를 pinfo 변수에 저장 -->
-			<sec:authentication property="principal" var="pinfo" />
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button type="submit" id="btnEdit">
 					<spring:message code="action.edit" />
@@ -60,18 +57,6 @@
 				<button type="submit" id="btnRemove">
 					<spring:message code="action.remove" />
 				</button>
-			</sec:authorize>
-
-			<sec:authorize access="hasRole('ROLE_MEMBER')">
-				<!-- 인가된 정보의 ID가 게시글 작성자와 동일한지 체크 - 동일하면 수정/삭제 버튼 출력 -->
-				<c:if test="${pinfo.username eq board.writer}">
-					<button type="submit" id="btnEdit">
-						<spring:message code="action.edit" />
-					</button>
-					<button type="submit" id="btnRemove">
-						<spring:message code="action.remove" />
-					</button>
-				</c:if>
 			</sec:authorize>
 
 			<button type="submit" id="btnList">
@@ -89,22 +74,22 @@
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#board");
+			let formObj = $("#notice");
 			$("#btnEdit").on("click", function() {
-				let boardNo = $("#boardNo").val();
+				let noticeNo = $("#noticeNo").val();
 				let page = $("#page").val();
 				let sizePerPage = $("#sizePerPage").val();
 				let keyword = $("#keyword").val();
 				let searchType = $("#searchType").val();
-				self.location = "modify?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&boardNo=" + boardNo;
+				self.location = "modify?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&noticeNo=" + noticeNo;
 			});
 			$("#btnRemove").on("click", function() {
-				let boardNo = $("#boardNo").val();
+				let noticeNo = $("#noticeNo").val();
 				let page = $("#page").val();
 				let sizePerPage = $("#sizePerPage").val();
 				let keyword = $("#keyword").val();
 				let searchType = $("#searchType").val();
-				self.location = "remove?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&boardNo=" + boardNo;
+				self.location = "remove?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&noticeNo=" + noticeNo;
 			});
 			$("#btnList").on("click", function() {
 				let page = $("#page").val();

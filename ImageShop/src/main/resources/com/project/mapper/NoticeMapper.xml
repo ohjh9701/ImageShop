@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.mapper.NoticeMapper">
+
+	<!-- 검색 조건을 나타내는 쿼리 조각 -->
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				AND title LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+			</if>
+			<if test="searchType == 'c'.toString()">
+				AND content LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				AND (title LIKE CONCAT('%', CONCAT(#{keyword}, '%'))
+				OR
+				content LIKE CONCAT('%', CONCAT(#{keyword}, '%')))
+			</if>
+		</if>
+	</sql>
+	<sql id="total_list">
+		<if test="searchType == null">
+			and rnum between #{sizePerPage}*#{page}-9 and
+			#{sizePerPage}*#{page}
+		</if>
+	</sql>
+
+	<!-- 공지사항 등록 처리 -->
+	<insert id="create">
+		INSERT INTO notice (notice_no, title, content)
+		VALUES(notice_seq.NEXTVAL, #{title}, #{content} )
+	</insert>
+
+	<select id="count" resultType="int">
+		<![CDATA[ SELECT count(notice_no) FROM notice WHERE notice_no > 0 ]]>
+		<include refid="search"></include>
+	</select>
+
+
+	<!-- 현재 페이지 리스트 출력 -->
+	<select id="list" resultType="notice">
+		SELECT notice_no, title, content, reg_date
+		FROM (
+		SELECT notice_no, title, content, reg_date, ROWNUM as rnum
+		FROM (
+		SELECT notice_no, title, content, reg_date
+		FROM notice
+		WHERE notice_no > 0
+		<include refid="search"></include>
+		ORDER BY notice_no DESC
+		)
+		WHERE ROWNUM &lt;= #{page} * #{sizePerPage}
+		)
+		WHERE rnum &gt;= (#{page} * #{sizePerPage}) - (#{sizePerPage} - 1)
+	</select>
+
+	<select id="read">
+		SELECT notice_no, title, content, reg_date
+		FROM notice WHERE notice_no = #{noticeNo}
+	</select>
+	
+	<!-- 수정 -->
+	<update id="update">
+		UPDATE notice SET title = #{title}, content =
+		#{content} WHERE notice_no = #{noticeNo}
+	</update>
+	<!-- 삭제 -->
+	<delete id="delete">
+		DELETE FROM notice WHERE notice_no = #{noticeNo}
+	</delete>
+
+
+</mapper>

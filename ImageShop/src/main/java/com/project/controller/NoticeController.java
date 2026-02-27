@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,44 +16,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.common.domain.CodeLabelValue;
 import com.project.common.domain.PageRequest;
 import com.project.common.domain.Pagination;
-import com.project.common.security.domain.CustomUser;
 import com.project.domain.Board;
-import com.project.domain.Member;
-import com.project.service.BoardService;
+import com.project.domain.Notice;
+import com.project.service.NoticeService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/board")
-public class BoardController {
+@RequestMapping("/notice")
+public class NoticeController {
 
 	@Autowired
-	private BoardService service;
+	private NoticeService service;
 
+	// 공지사항 등록 페이지
 	@GetMapping("/register")
-	@PreAuthorize("hasRole('ROLE_MEMBER')")
-	public void getMethodName(Model model, Authentication authentication) throws Exception {
-		// 로그인한 사용자 정보 획득
-		CustomUser customUser = (CustomUser) authentication.getPrincipal();
-		Member member = customUser.getMember();
-		Board board = new Board();
-
-		// 로그인한 사용자 아이디를 등록 페이지에 표시
-		board.setWriter(member.getUserId());
-		model.addAttribute(board);
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void registerForm(Model model) throws Exception {
+		Notice notice = new Notice();
+		model.addAttribute(notice);
 	}
 
+	// 공지사항 등록 처리
 	@PostMapping("/register")
-	public String postMethodName(Board board, RedirectAttributes rttr) throws Exception {
-		int count = service.register(board);
-		if (count != 0) {
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String register(Notice notice, RedirectAttributes rttr) throws Exception {
+		int count = service.register(notice);
+		
+		if(count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
-			return "redirect:/board/list";
 		}
-		return "redirect:/board/register";
+		
+		return "redirect:/notice/list";
 	}
-
+	
 	@GetMapping("/list")
 	public void list(@ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
 		//요청하는 페이지가 4페이지라면 31~40 게시글을 불러온다.
@@ -71,29 +67,26 @@ public class BoardController {
 		searchTypeCodeValueList.add(new CodeLabelValue("n", "---"));
 		searchTypeCodeValueList.add(new CodeLabelValue("t", "제목"));
 		searchTypeCodeValueList.add(new CodeLabelValue("c", "내용"));
-		searchTypeCodeValueList.add(new CodeLabelValue("w", "작성자"));
 		searchTypeCodeValueList.add(new CodeLabelValue("tc", "제목/내용"));
-		searchTypeCodeValueList.add(new CodeLabelValue("cw", "내용/작성자"));
-		searchTypeCodeValueList.add(new CodeLabelValue("tcw", "전체검색"));
 		
 		model.addAttribute("searchTypeCodeValueList", searchTypeCodeValueList);
 	}
-
+	
 	@GetMapping("/detail")
-	public void detail(@ModelAttribute("pgrq") PageRequest pageRequest, Board board, Model model) throws Exception {
-		model.addAttribute(service.read(board));
+	public void detail(@ModelAttribute("pgrq") PageRequest pageRequest, Notice notice, Model model) throws Exception {
+		model.addAttribute(service.read(notice));
 	}
-
+	
 	@GetMapping("/modify")
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-	public void modifyForm(Board board, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
-		model.addAttribute(service.read(board));
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public void modifyForm(Notice notice, @ModelAttribute("pgrq") PageRequest pageRequest, Model model) throws Exception {
+		model.addAttribute(service.read(notice));
 	}
 
 	@PostMapping("/modify")
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-	public String modify(Board board, PageRequest pageRequest, RedirectAttributes rttr) throws Exception {
-		int count = service.modify(board);
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String modify(Notice notice, PageRequest pageRequest, RedirectAttributes rttr) throws Exception {
+		int count = service.modify(notice);
 		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		}
@@ -101,14 +94,16 @@ public class BoardController {
 		rttr.addAttribute("sizePerPage",pageRequest.getSizePerPage());
 		rttr.addAttribute("searchType",pageRequest.getSearchType());
 		rttr.addAttribute("keyword",pageRequest.getKeyword());
-		log.info(pageRequest.toString());
-		return "redirect:/board/list";
+		log.info("searchType="+pageRequest.getSearchType());
+		log.info("keyword="+pageRequest.getKeyword());
+		
+		return "redirect:/notice/list";
 	}
 
 	@GetMapping("/remove")
-	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-	public String remove(Board board, PageRequest pageRequest, RedirectAttributes rttr) throws Exception {
-		int count = service.remove(board);
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String remove(Notice notice, PageRequest pageRequest, RedirectAttributes rttr) throws Exception {
+		int count = service.remove(notice);
 		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		}
@@ -118,7 +113,7 @@ public class BoardController {
 		rttr.addAttribute("searchType",pageRequest.getSearchType());
 		rttr.addAttribute("keyword",pageRequest.getKeyword());
 		
-		return "redirect:/board/list";
+		return "redirect:/notice/list";
 	}
 
 }

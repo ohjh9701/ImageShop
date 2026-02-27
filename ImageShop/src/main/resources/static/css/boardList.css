@@ -26,6 +26,9 @@
 .container a[href="/board/register"]:hover {
     background-color: #1a1a1a;
 }
+.container a[href="/notice/register"]:hover {
+    background-color: #1a1a1a;
+}
 
 
 /* 테이블: 기존의 다크 헤더 스타일 유지 */
@@ -49,7 +52,6 @@
     border-bottom: 1px solid #eee !important;
     color: #444;
     font-size: 14px;
-    text-align: center;
 }
 
 /* [추가: 페이징 네비게이션 - 기존 스타일과 통일] */
@@ -160,7 +162,8 @@
 }
 
 /* 등록 버튼: 기존 스타일 고수 */
-.container a[href="/board/register"] {
+.container a[href="/board/register"],
+.container a[href="/notice/register"] {
     display: inline-block;
     float: right;
     background-color: #e2012d;

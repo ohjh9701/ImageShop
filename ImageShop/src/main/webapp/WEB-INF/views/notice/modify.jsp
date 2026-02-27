@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Board Modify</title>
+<title>Notice Modify</title>
 <link rel="stylesheet" href="/css/boardRegister.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -19,8 +19,8 @@
 	<!-- 메인화면 작업 영역 시작 -->
 	<div class="container">
 		<h2>T1 커뮤니티</h2>
-		<form:form modelAttribute="board" action="modify" method="post">
-			<form:hidden path="boardNo" />
+		<form:form modelAttribute="notice" action="modify" method="post">
+			<form:hidden path="noticeNo" />
 			<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
 			<input type="hidden" id="searchType" name="searchType" value="${pgrq.searchType}">
 			<input type="hidden" id="keyword" name="keyword" value="${pgrq.keyword}">
@@ -29,17 +29,16 @@
 				value="${pgrq.sizePerPage}">
 			<table>
 					<tr>
-						<td><spring:message code="board.title" /></td>
+						<td><spring:message code="notice.title" /></td>
 						<td><form:input path="title" /></td>
 						<td><font color="red"><form:errors path="title" /></font></td>
 					</tr>
 					<tr>
-						<td><spring:message code="board.writer" /></td>
-						<td><form:input path="writer" readonly="true" /></td>
-						<td><font color="red"><form:errors path="writer" /></font></td>
+						<td>작성자</td>
+						<td colspan="2">admin[관리자]</td>
 					</tr>
 					<tr>
-						<td><spring:message code="board.content" /></td>
+						<td><spring:message code="notice.content" /></td>
 						<td><form:textarea path="content" /></td>
 						<td><font color="red"><form:errors path="content" /></font></td>
 					</tr>
@@ -47,21 +46,10 @@
 		</form:form>
 
 		<div>
-			<!-- 로그인(인가)된 정보를 pinfo 변수에 저장 -->
-			<sec:authentication property="principal" var="pinfo" />
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button type="submit" id="btnModify">
 					<spring:message code="action.modify" />
 				</button>
-			</sec:authorize>
-
-			<sec:authorize access="hasRole('ROLE_MEMBER')">
-				<!-- 인가된 정보의 ID가 게시글 작성자와 동일한지 체크 - 동일하면 수정/삭제 버튼 출력 -->
-				<c:if test="${pinfo.username eq board.writer}">
-					<button type="submit" id="btnModify">
-						<spring:message code="action.modify" />
-					</button>
-				</c:if>
 			</sec:authorize>
 
 			<button type="submit" id="btnList">
@@ -79,7 +67,7 @@
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#board");
+			let formObj = $("#notice");
 			$("#btnModify").on("click", function() {
 				formObj.submit();
 			});
