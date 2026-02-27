@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.common.domain.PageRequest;
 import com.project.domain.Notice;
@@ -16,6 +17,7 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeMapper mapper;
 
 	@Override
+	@Transactional
 	public int register(Notice notice) throws Exception {
 		return mapper.create(notice);
 	}
@@ -36,11 +38,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
+	@Transactional
 	public int modify(Notice notice) throws Exception {
 		return mapper.update(notice);
 	}
 
 	@Override
+	@Transactional
 	public int remove(Notice notice) throws Exception {
 		return mapper.delete(notice);
 	}
