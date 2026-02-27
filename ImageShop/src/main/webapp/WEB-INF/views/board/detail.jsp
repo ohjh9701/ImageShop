@@ -49,10 +49,41 @@
 				</tr>
 			</table>
 		</form:form>
+		<div class="reply_view">
+			
+			<c:choose>
+					<c:when test="${empty replyList}">
+						<tr>
+							<td colspan="3"><spring:message code="common.listEmpty" /></td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${replyList}" var="reply">
+							<tr>
+								<td align="center">${reply.member.userId}</td>
+								<td align="center">${reply.content}</td>
+								<td align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${reply.regDate}" /></td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+		</div>
+		<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
+		<div class="reply_register">
+		<sec:authentication property="principal" var="pinfo" />
+			<form action="/reply/replyRegister" method="get">
+			<input type="hidden" name="username" value="${pinfo.username}" />
+			<input type="hidden" name="boardNo" value="${board.boardNo}" />
+			<label for="reply_content">댓글작성</label>
+				<textarea id="reply_content" name="content"> </textarea>
+				<button type="submit">댓글작성</button>
+			</form>
+			
+		</div>
+		</sec:authorize>
 
 		<div>
 			<!-- 로그인(인가)된 정보를 pinfo 변수에 저장 -->
-			<sec:authentication property="principal" var="pinfo" />
 			<sec:authorize access="hasRole('ROLE_ADMIN')">
 				<button type="submit" id="btnEdit">
 					<spring:message code="action.edit" />

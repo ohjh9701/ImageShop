@@ -21,8 +21,11 @@ import com.project.common.security.domain.CustomUser;
 import com.project.domain.Board;
 import com.project.domain.Member;
 import com.project.service.BoardService;
+import com.project.service.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @Controller
@@ -31,6 +34,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
+	
+	@Autowired
+	private ReplyService replyService;
 
 	@GetMapping("/register")
 	@PreAuthorize("hasRole('ROLE_MEMBER')")
@@ -81,6 +87,9 @@ public class BoardController {
 
 	@GetMapping("/detail")
 	public void detail(@ModelAttribute("pgrq") PageRequest pageRequest, Board board, Model model) throws Exception {
+		
+		model.addAttribute("replyList",replyService.list(board));
+		
 		model.addAttribute(service.read(board));
 	}
 
@@ -120,5 +129,9 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	
+	
+	
 
 }

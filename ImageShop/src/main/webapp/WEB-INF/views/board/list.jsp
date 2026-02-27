@@ -24,9 +24,11 @@
 		</h2>
 
 		<!-- 검색 폼을 만든다. -->
+		<sec:authentication property="principal" var="pinfo" />
 		<div class="list_top_menu">
 		<form:form modelAttribute="pgrq" method="get"
 			action="list${pgrq.toUriStringByPage(pgrq.page)}">
+
 			<div class="search-bar">
 			<form:select path="searchType" items="${searchTypeCodeValueList}"
 				itemValue="value" itemLabel="label" />

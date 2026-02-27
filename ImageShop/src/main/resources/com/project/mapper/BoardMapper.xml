@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.mapper.BoardMapper">
 
+
 	<!-- 검색 조건을 나타내는 쿼리 조각 -->
 	<sql id="search">
 		<if test="searchType != null">
@@ -93,4 +94,5 @@
     )
     WHERE rnum &gt;= (#{page} * #{sizePerPage}) - (#{sizePerPage} - 1)
 </select>
+
 </mapper> 

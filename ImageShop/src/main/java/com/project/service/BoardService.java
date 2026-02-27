@@ -30,5 +30,7 @@ public interface BoardService {
 	public List<Board> list(PageRequest pageRequest) throws Exception;
 
 	public int count(PageRequest pageRequest) throws Exception;
+
+	public int replyRegister(Board board) throws Exception;
 	
 }

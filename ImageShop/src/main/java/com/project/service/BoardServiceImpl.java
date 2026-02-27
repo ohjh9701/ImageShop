@@ -59,4 +59,9 @@ public class BoardServiceImpl implements BoardService {
 	public int count(PageRequest pageRequest) throws Exception {
 		return mapper.count(pageRequest);
 	}
+
+	@Override
+	public int replyRegister(Board board) throws Exception {
+		return mapper.replyRegister(board);
+	}
 }

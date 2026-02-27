@@ -103,4 +103,9 @@ public class MemberServiceImpl implements MemberService {
 
 		return count;
 	}
+
+	@Override
+	public Member readByNo(String username) throws Exception {
+		return mapper.readByNo(username);
+	}
 }

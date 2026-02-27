@@ -82,4 +82,8 @@
 	<select id="countAll" resultType="int">
 		SELECT COUNT(*) FROM member
 	</select>
+	
+	<select id="readByNo">
+		SELECT user_no FROM MEMBER WHERE user_id = #{username}
+	</select>
 </mapper>

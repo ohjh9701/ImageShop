@@ -20,4 +20,6 @@ public interface MemberService {
 
 	public int setupAdmin(Member member) throws Exception;
 
+	public Member readByNo(String username) throws Exception;
+
 }
