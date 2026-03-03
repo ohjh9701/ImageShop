@@ -24,5 +24,10 @@ public class ReplyServiceImpl implements ReplyService{
 	public List<Reply> list(Board board) throws Exception {
 		return mapper.list(board);
 	}
+
+	@Override
+	public void delete(Reply reply) throws Exception {
+		mapper.delete(reply);
+	}
 	
 }

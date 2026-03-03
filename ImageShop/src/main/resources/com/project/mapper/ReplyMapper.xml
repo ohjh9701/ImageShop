@@ -18,19 +18,25 @@
 	</resultMap>
 
 	<insert id="replyRegister">
-		insert into reply values(reply_seq.nextval, #{userNo}, #{boardNo}, #{content}, sysdate)
+		insert into reply values(reply_seq.nextval, #{boardNo}, #{userNo}, #{content}, sysdate)
 	</insert>
 	
-	<select id="list">
+	<select id="list" resultMap="replyMap">
 		SELECT
+		r.reply_no,
     r.content,
     r.reg_date,
-    m.user_id
+    m.user_id,
+    m.user_no
 FROM board b
 INNER JOIN reply r
     ON b.board_no = r.board_no
     inner join member m on r.user_no = m.user_no
 WHERE b.board_no = #{boardNo} order by r.reply_no asc
 	</select>
+	
+	<delete id="delete">
+		DELETE FROM Reply WHERE reply_no = #{replyNo}
+	</delete>
 
 </mapper> 

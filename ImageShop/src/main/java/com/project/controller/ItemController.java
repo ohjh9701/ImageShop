@@ -37,7 +37,7 @@ public class ItemController {
 	@Autowired
 	private ItemService service;
 
-	@Value("${D:/upload}")
+	@Value("${upload.path}")
 	private String uploadPath;
 
 	// 상품 등록 페이지
@@ -83,6 +83,38 @@ public class ItemController {
 		model.addAttribute(service.read(item));
 		return "item/modify";
 	}
+
+	// 상품 수정 처리
+	@PostMapping("/modify")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String modify(Item item, RedirectAttributes rttr) throws Exception {
+		MultipartFile pictureFile = item.getPicture();
+
+		if (pictureFile != null && pictureFile.getSize() > 0) {
+			String createdFilename = uploadFile(pictureFile.getOriginalFilename(), pictureFile.getBytes());
+			item.setPictureUrl(createdFilename);
+		}
+
+		MultipartFile previewFile = item.getPreview();
+
+		if (previewFile != null && previewFile.getSize() > 0) {
+			String createdFilename = uploadFile(previewFile.getOriginalFilename(), previewFile.getBytes());
+			item.setPreviewUrl(createdFilename);
+		}
+		service.modify(item);
+		
+		rttr.addFlashAttribute("msg", "SUCCESS");
+		
+		return "redirect:/item/list";
+	}
+	
+	// 상품 수정 페이지
+		@GetMapping("/remove")
+		@PreAuthorize("hasRole('ROLE_ADMIN')")
+		public String removeForm(Item item, Model model) throws Exception {
+			model.addAttribute(service.read(item));
+			return "item/remove";
+		}
 
 	// 미리보기 이미지 표시
 	@ResponseBody

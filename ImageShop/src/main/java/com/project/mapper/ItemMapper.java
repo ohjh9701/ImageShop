@@ -15,5 +15,7 @@ public interface ItemMapper {
 	public String getPicture(Item item) throws Exception;
 
 	public Item read(Item item) throws Exception;
+
+	public void modify(Item item)throws Exception;
 	
 }

@@ -23,8 +23,10 @@
 		<form:form modelAttribute="board">
 			<form:hidden path="boardNo" />
 			<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
-			<input type="hidden" id="searchType" name="searchType" value="${pgrq.searchType}">
-			<input type="hidden" id="keyword" name="keyword" value="${pgrq.keyword}">
+			<input type="hidden" id="searchType" name="searchType"
+				value="${pgrq.searchType}">
+			<input type="hidden" id="keyword" name="keyword"
+				value="${pgrq.keyword}">
 			<input type="hidden" id="page" name="page" value="${pgrq.page}">
 			<input type="hidden" id="sizePerPage" name="sizePerPage"
 				value="${pgrq.sizePerPage}">
@@ -49,12 +51,16 @@
 				</tr>
 			</table>
 		</form:form>
+		<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal" var="pinfo" />
+		</sec:authorize>
+
 		<div class="reply_view">
-			
-			<c:choose>
+			<table>
+				<c:choose>
 					<c:when test="${empty replyList}">
 						<tr>
-							<td colspan="3"><spring:message code="common.listEmpty" /></td>
+							<td colspan="4"><spring:message code="common.listEmpty" /></td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -62,24 +68,39 @@
 							<tr>
 								<td align="center">${reply.member.userId}</td>
 								<td align="center">${reply.content}</td>
-								<td align="center"><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${reply.regDate}" /></td>
+								<td align="center"><fmt:formatDate
+										pattern="yyyy-MM-dd HH:mm" value="${reply.regDate}" /></td>
+
+								<sec:authorize access="isAuthenticated()">
+									<c:if test="${pinfo.username eq reply.member.userId}">
+										<td>
+											<form action="/reply/delete" method="post"
+												style="display: inline;">
+												<input type="hidden" name="replyNo" value="${reply.replyNo}">
+												<input type="hidden" name="boardNo" value="${board.boardNo}">
+												<button type="submit" class="btn-close" aria-label="삭제"
+													onclick="return confirm('정말 삭제하시겠습니까?')"></button>
+											</form>
+										</td>
+									</c:if>
+								</sec:authorize>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+			</table>
 		</div>
+
 		<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
-		<div class="reply_register">
-		<sec:authentication property="principal" var="pinfo" />
-			<form action="/reply/replyRegister" method="get">
-			<input type="hidden" name="username" value="${pinfo.username}" />
-			<input type="hidden" name="boardNo" value="${board.boardNo}" />
-			<label for="reply_content">댓글작성</label>
-				<textarea id="reply_content" name="content"> </textarea>
-				<button type="submit">댓글작성</button>
-			</form>
-			
-		</div>
+			<div class="reply_register">
+				<form action="/reply/replyRegister" method="get">
+					<input type="hidden" name="username" value="${pinfo.username}" />
+					<input type="hidden" name="boardNo" value="${board.boardNo}" /> <label
+						for="reply_content">댓글작성</label>
+					<textarea id="reply_content" name="content"></textarea>
+					<button type="submit">댓글작성</button>
+				</form>
+			</div>
 		</sec:authorize>
 
 		<div>
@@ -119,32 +140,50 @@
 	<!-- 이벤트 처리 영역 -->
 
 	<script>
-		$(document).ready(function() {
-			let formObj = $("#board");
-			$("#btnEdit").on("click", function() {
-				let boardNo = $("#boardNo").val();
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "modify?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&boardNo=" + boardNo;
-			});
-			$("#btnRemove").on("click", function() {
-				let boardNo = $("#boardNo").val();
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "remove?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&boardNo=" + boardNo;
-			});
-			$("#btnList").on("click", function() {
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "list?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword;
-			});
-		});
+		$(document).ready(
+				function() {
+					let formObj = $("#board");
+					$("#btnEdit").on(
+							"click",
+							function() {
+								let boardNo = $("#boardNo").val();
+								let page = $("#page").val();
+								let sizePerPage = $("#sizePerPage").val();
+								let keyword = $("#keyword").val();
+								let searchType = $("#searchType").val();
+								self.location = "modify?page=" + page
+										+ "&sizePerPage=" + sizePerPage
+										+ "&searchType=" + searchType
+										+ "&keyword=" + keyword + "&boardNo="
+										+ boardNo;
+							});
+					$("#btnRemove").on(
+							"click",
+							function() {
+								let boardNo = $("#boardNo").val();
+								let page = $("#page").val();
+								let sizePerPage = $("#sizePerPage").val();
+								let keyword = $("#keyword").val();
+								let searchType = $("#searchType").val();
+								self.location = "remove?page=" + page
+										+ "&sizePerPage=" + sizePerPage
+										+ "&searchType=" + searchType
+										+ "&keyword=" + keyword + "&boardNo="
+										+ boardNo;
+							});
+					$("#btnList").on(
+							"click",
+							function() {
+								let page = $("#page").val();
+								let sizePerPage = $("#sizePerPage").val();
+								let keyword = $("#keyword").val();
+								let searchType = $("#searchType").val();
+								self.location = "list?page=" + page
+										+ "&sizePerPage=" + sizePerPage
+										+ "&searchType=" + searchType
+										+ "&keyword=" + keyword;
+							});
+				});
 	</script>
 </body>
 </html>

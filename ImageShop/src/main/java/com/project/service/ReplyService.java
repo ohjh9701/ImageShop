@@ -11,4 +11,6 @@ public interface ReplyService {
 
 	public List<Reply> list(Board board) throws Exception;
 
+	public void delete(Reply reply)throws Exception;
+
 }

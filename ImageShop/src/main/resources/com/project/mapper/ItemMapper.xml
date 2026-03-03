@@ -40,4 +40,10 @@
 		WHERE item_id = #{itemId}
 	</select>
 
+	<!-- 상품 수정 처리 -->
+	<update id="modify">
+		UPDATE item SET item_name = #{itemName}, price = #{price}, description = #{description}, picture_url = #{pictureUrl}, preview_url = #{previewUrl}
+		WHERE item_id = #{itemId}
+	</update>
+
 </mapper> 
