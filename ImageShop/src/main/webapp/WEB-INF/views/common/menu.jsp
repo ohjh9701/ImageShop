@@ -17,12 +17,12 @@
 				<!-- 회원 게시판를 메뉴에 추가한다. -->
 				<td width="20%"><a href="/board/list"><spring:message
 							code="menu.board.member" /></a></td>
-				<!-- 공지사항을 메뉴에 추가한다. -->
-				<td width="20%"><a href="/notice/list"><spring:message
-							code="menu.notice.member" /></a></td>
 							<!-- 상품리스트를 메뉴에 추가한다. -->
 				<td width="20%"><a href="/item/list"><spring:message
 							code="menu.item.member" /></a></td>
+				<!-- 공지사항을 메뉴에 추가한다. -->
+				<td width="20%"><a href="/notice/list"><spring:message
+							code="menu.notice.member" /></a></td>
 			</sec:authorize>
 
 			<!-- 인증된 사용자인 경우 true -->
@@ -30,34 +30,37 @@
 
 				<!-- 관리자 권한을 가진 사용자인 경우 true -->
 				<sec:authorize access="hasRole('ROLE_ADMIN')">
+					<!-- 회원 게시판를 메뉴에 추가한다. -->
+					<td width="10%"><a href="/board/list"><spring:message
+								code="menu.board.member" /></a></td>
+								<!-- 상품리스트를 메뉴에 추가한다. -->
+				<td width="10%"><a href="/item/list"><spring:message
+							code="menu.item.member" /></a></td>
+								<!-- 공지사항을 메뉴에 추가한다. -->
+				<td width="10%"><a href="/notice/list"><spring:message
+							code="menu.notice.member" /></a></td>
 					<td width="10%"><a href="/user/list"><spring:message
 								code="menu.user.admin" /></a></td>
 					<td width="10%"><a href="/codegroup/list"><spring:message
 								code="menu.codegroup.list" /></a></td>
 					<td width="10%"><a href="/codedetail/list"><spring:message
 								code="menu.codedetail.list" /></a></td>
-					<!-- 회원 게시판를 메뉴에 추가한다. -->
-					<td width="10%"><a href="/board/list"><spring:message
-								code="menu.board.member" /></a></td>
-								<!-- 공지사항을 메뉴에 추가한다. -->
-				<td width="10%"><a href="/notice/list"><spring:message
-							code="menu.notice.member" /></a></td>
-								<!-- 상품리스트를 메뉴에 추가한다. -->
-				<td width="10%"><a href="/item/list"><spring:message
-							code="menu.item.member" /></a></td>
 				</sec:authorize>
 
 				<!-- 회원 권한을 가진 사용자인 경우 true -->
 				<sec:authorize access="hasRole('ROLE_MEMBER')">
 					<!-- 회원 게시판를 메뉴에 추가한다. -->
-					<td width="15%"><a href="/board/register">T1 커뮤니티 글쓰기</a></td>
-					<td width="15%"><a href="/board/list">T1 커뮤니티</a></td>
-					<!-- 공지사항을 메뉴에 추가한다. -->
-				<td width="15%"><a href="/notice/list"><spring:message
-							code="menu.notice.member" /></a></td>
+					<td width="12%"><a href="/board/list">T1 커뮤니티</a></td>
 							<!-- 상품리스트를 메뉴에 추가한다. -->
-				<td width="15%"><a href="/item/list"><spring:message
+				<td width="12%"><a href="/item/list"><spring:message
 							code="menu.item.member" /></a></td>
+					<!-- 공지사항을 메뉴에 추가한다. -->
+				<td width="12%"><a href="/notice/list"><spring:message
+							code="menu.notice.member" /></a></td>
+							<!-- 충전 메뉴를 추가한다. -->
+				<td width="12%"><a href="/coin/charge">코인충전</a></td>
+							<!-- 충전 메뉴를 추가한다. -->
+				<td width="12%"><a href="/coin/list">충전내역</a></td>
 				</sec:authorize>
 			</sec:authorize>
 

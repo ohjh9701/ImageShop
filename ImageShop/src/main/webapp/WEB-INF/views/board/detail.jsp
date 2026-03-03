@@ -60,7 +60,7 @@
 				<c:choose>
 					<c:when test="${empty replyList}">
 						<tr>
-							<td colspan="4"><spring:message code="common.listEmpty" /></td>
+							<td colspan="4">여러분의 소중한 댓글을 남겨주세요.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
@@ -78,8 +78,8 @@
 												style="display: inline;">
 												<input type="hidden" name="replyNo" value="${reply.replyNo}">
 												<input type="hidden" name="boardNo" value="${board.boardNo}">
-												<button type="submit" class="btn-close" aria-label="삭제"
-													onclick="return confirm('정말 삭제하시겠습니까?')"></button>
+												<button type="submit" id="btnDelete"
+													onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
 											</form>
 										</td>
 									</c:if>

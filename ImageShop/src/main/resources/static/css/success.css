@@ -74,6 +74,28 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(198, 156, 109, 0.3);
 }
+/* 충전 버튼 스타일 */
+.success a.charge{
+    display: block;
+    background-color: #e2012d; /* T1 Black */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 16px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* 로그인 버튼 호버 */
+.success a.charge:hover {
+    background-color: #ff012d; /* T1 Gold로 변신 */
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(198, 156, 109, 0.3);
+}
 
 /* 로그인 버튼 스타일 */
 .success a.main{

@@ -151,6 +151,18 @@ input#title[readonly] {
     background-color: #b00024;
     box-shadow: 0 4px 12px rgba(226, 1, 45, 0.3);
 }
+/* 목록(삭제) 버튼 - T1 RED */
+#btnDelete {
+	padding: 6px 12px;
+    background: linear-gradient(135deg, #e2012d 0%, #b00024 100%); /* 레드 그라데이션 */
+    color: #fff;
+    font-weight: 500;
+}
+
+#btnDelete:hover {
+    background: linear-gradient(135deg, #e2012d 0%, #b00024 100%); /* 레드 그라데이션 */
+    box-shadow: 0 4px 12px rgba(226, 1, 45, 0.3);
+}
 /* --- 댓글 리스트 강화 스타일 --- */
 
 .reply_view {
@@ -211,17 +223,12 @@ input#title[readonly] {
     width: 20px;
     height: 20px;
     background: #eee url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/50% no-repeat;
+    background-size: contain;
     border: none;
     border-radius: 4px;
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.2s;
-}
-
-.btn-close:hover {
-    opacity: 1;
-    background-color: #e2012d; /* 호버 시 T1 Red 배경 */
-    filter: invert(1); /* 아이콘 색상을 흰색으로 반전 */
 }
 
 /* 댓글이 없을 때 메시지 */
@@ -238,7 +245,6 @@ input#title[readonly] {
     padding: 30px;
     background-color: #ffffff; /* T1 Black 배경 */
     border-radius: 8px;
-    border: 1px solid #333;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
@@ -246,7 +252,7 @@ input#title[readonly] {
     display: block;
     font-weight: 900;
     font-size: 16px;
-    color: #c69c6d; /* T1 Gold 라벨 */
+    color: #000000; /* T1 Gold 라벨 */
     margin-bottom: 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -270,9 +276,9 @@ input#title[readonly] {
     height: 120px;
     padding: 15px;
     background-color: #ffffff; /* 다크 모드 입력창 */
-    border: 1px solid #444;
+    border-color: #e2012d; /* 포커스 시 레드 라인 */
     border-radius: 4px;
-    color: #fff;
+    color: #151515;
     font-family: 'Pretendard', sans-serif;
     font-size: 15px;
     line-height: 1.6;
@@ -284,7 +290,7 @@ input#title[readonly] {
 .reply_register textarea:focus {
     outline: none;
     border-color: #e2012d; /* 포커스 시 레드 라인 */
-    background-color: #2a2a2a;
+    background-color: #ffffff;
     box-shadow: 0 0 8px rgba(226, 1, 45, 0.2);
 }
 
@@ -301,17 +307,14 @@ input#title[readonly] {
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 0 #80001a; /* 입체감 있는 하단 그림자 */
 }
 
 .reply_register button:hover {
-    transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(226, 1, 45, 0.4);
     filter: brightness(1.1);
 }
 
 .reply_register button:active {
-    transform: translateY(2px);
     box-shadow: 0 2px 0 #80001a;
 }
 
