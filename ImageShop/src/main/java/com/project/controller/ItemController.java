@@ -75,6 +75,14 @@ public class ItemController {
 		List<Item> itemList = service.list();
 		model.addAttribute("itemList", itemList);
 	}
+	
+	// 상품 상세 페이지 
+	@GetMapping("/detail") 
+	public String read(Item item, Model model) throws Exception { 
+	Item _item = service.read(item); 
+	model.addAttribute(_item); 
+	return "item/detail"; 
+	} 
 
 	// 상품 수정 페이지
 	@GetMapping("/modify")

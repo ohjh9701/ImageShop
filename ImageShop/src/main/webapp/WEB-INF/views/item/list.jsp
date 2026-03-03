@@ -48,8 +48,8 @@
                                 <a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
                                 <a href="remove?itemId=${item.itemId}" class="btn-remove">삭제</a>
                             </sec:authorize>
-                            <sec:authorize access="hasRole('ROLE_MEMBER')">
-                                <a href="read?itemId=${item.itemId}" class="btn-read">상세보기</a>
+                            <sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
+                                <a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
                             </sec:authorize>
                         </div>
                     </div>

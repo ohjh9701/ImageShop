@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Board Detail : ${board.title}</title>
-<link rel="stylesheet" href="/css/boardDetail.css">
+<link rel="stylesheet" href="/css/itemRegister.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -19,52 +19,41 @@
 
 	<!-- 메인화면 작업 영역 시작 -->
 	<div class="container">
-		<h2>T1 커뮤니티</h2>
-		<form:form modelAttribute="notice">
-			<form:hidden path="noticeNo" />
-			<!-- 현재 페이지 번호와 페이징 크기를 숨겨진 필드 요소를 사용하여 전달한다. -->
-			<input type="hidden" id="searchType" name="searchType" value="${pgrq.searchType}">
-			<input type="hidden" id="keyword" name="keyword" value="${pgrq.keyword}">
-			<input type="hidden" id="page" name="page" value="${pgrq.page}">
-			<input type="hidden" id="sizePerPage" name="sizePerPage"
-				value="${pgrq.sizePerPage}">
+		<h2>
+			<spring:message code="item.header.read" />
+		</h2>
+
+		<form:form modelAttribute="item">
+			<form:hidden path="itemId" />
+			<form:hidden path="pictureUrl" />
+			<form:hidden path="previewUrl" />
+
 			<table>
 				<tr>
-					<td><spring:message code="notice.title" /></td>
-					<td><form:input path="title" readonly="true" /></td>
-					<td align="right" class="reg-date">작성일 : <fmt:formatDate
-							pattern="yyyy-MM-dd HH:mm" value="${notice.regDate}" />
-					</td>
-					<td><font color="red"><form:errors path="title" /></font></td>
+					<td><spring:message code="item.itemName" /></td>
+					<td>${item.itemName}</td>
 				</tr>
 				<tr>
-					<td>작성자</td>
-					<td colspan="3">admin[관리자]</td>
+					<td><spring:message code="item.itemPrice" /></td>
+					<td>${item.price}원</td>
 				</tr>
 				<tr>
-					<td><spring:message code="notice.content" /></td>
-					<td colspan="2"><form:textarea path="content" readonly="true" /></td>
-					<td><font color="red"><form:errors path="content" /></font></td>
+					<td><spring:message code="item.preview" /></td>
+					<td><img src="display?itemId=${item.itemId}" width="210"></td>
+				</tr>
+				<tr>
+					<td><spring:message code="item.itemDescription" /></td>
+					<td><form:textarea path="description" disabled="true"/></td>
 				</tr>
 			</table>
 		</form:form>
-
-		<div>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-				<button type="submit" id="btnEdit">
-					<spring:message code="action.edit" />
+			<div>
+				<button type="submit" id="btnList">
+					<spring:message code="action.list" />
 				</button>
-				<button type="submit" id="btnRemove">
-					<spring:message code="action.remove" />
-				</button>
-			</sec:authorize>
-
-			<button type="submit" id="btnList">
-				<spring:message code="action.list" />
-			</button>
-		</div>
-
+			</div>
 	</div>
+
 
 	<!-- 메인화면 작업 영역 끝 -->
 
@@ -74,31 +63,12 @@
 
 	<script>
 		$(document).ready(function() {
-			let formObj = $("#notice");
-			$("#btnEdit").on("click", function() {
-				let noticeNo = $("#noticeNo").val();
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "modify?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&noticeNo=" + noticeNo;
-			});
-			$("#btnRemove").on("click", function() {
-				let noticeNo = $("#noticeNo").val();
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "remove?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword + "&noticeNo=" + noticeNo;
-			});
+			var formObj = $("#item");
 			$("#btnList").on("click", function() {
-				let page = $("#page").val();
-				let sizePerPage = $("#sizePerPage").val();
-				let keyword = $("#keyword").val();
-				let searchType = $("#searchType").val();
-				self.location = "list?page=" + page + "&sizePerPage=" + sizePerPage + "&searchType=" + searchType + "&keyword=" + keyword;
+				self.location = "list";
 			});
 		});
 	</script>
+
 </body>
 </html>

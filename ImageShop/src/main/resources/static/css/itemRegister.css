@@ -139,12 +139,16 @@
     color: #fff;
 }
 
-/* 목록 버튼: 연한 회색 */
+/* 목록(LIST) 버튼 - T1 RED */
 #btnList {
-    background-color: #888;
+    background-color: #e2012d;
     color: #fff;
+}
+
+#btnList:hover {
+    background-color: #b00024;
+    box-shadow: 0 4px 12px rgba(226, 1, 45, 0.3);
 }
 
 #btnRegister:hover { background-color: #b00024; }
 #btnModify:hover { background-color: #b00024; }
-#btnList:hover { background-color: #666; }
