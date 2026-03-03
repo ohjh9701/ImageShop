@@ -16,6 +16,8 @@ public interface ItemMapper {
 
 	public Item read(Item item) throws Exception;
 
-	public void modify(Item item)throws Exception;
+	public int modify(Item item)throws Exception;
+
+	public int delete(Item item)throws Exception;
 	
 }

@@ -92,6 +92,11 @@ public class ItemController {
 
 		if (pictureFile != null && pictureFile.getSize() > 0) {
 			String createdFilename = uploadFile(pictureFile.getOriginalFilename(), pictureFile.getBytes());
+			Item item2 = service.read(item);
+			String pictureUrl = item2.getPictureUrl();
+			File _pictureFile = new File(uploadPath, pictureUrl);
+			_pictureFile.delete();
+			
 			item.setPictureUrl(createdFilename);
 		}
 
@@ -99,22 +104,56 @@ public class ItemController {
 
 		if (previewFile != null && previewFile.getSize() > 0) {
 			String createdFilename = uploadFile(previewFile.getOriginalFilename(), previewFile.getBytes());
+			Item item2 = service.read(item);
+			String previewUrl = item2.getPreviewUrl();
+			File _previewFile = new File(uploadPath, previewUrl);
+			_previewFile.delete();
+			
 			item.setPreviewUrl(createdFilename);
 		}
 		service.modify(item);
-		
+
 		rttr.addFlashAttribute("msg", "SUCCESS");
-		
+
 		return "redirect:/item/list";
 	}
-	
+
 	// 상품 수정 페이지
-		@GetMapping("/remove")
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
-		public String removeForm(Item item, Model model) throws Exception {
-			model.addAttribute(service.read(item));
-			return "item/remove";
+	@GetMapping("/remove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String removeForm(Item item, Model model) throws Exception {
+		model.addAttribute(service.read(item));
+		return "item/remove";
+	}
+
+	// 상품 삭제 처리
+	@PostMapping("/remove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public String remove(Item item, RedirectAttributes rttr) throws Exception {
+		//외장하드에 있는 상품 이미지를 제거를 먼저 한다
+		Item _item = service.read(item);
+		String pictureUrl = _item.getPictureUrl();
+		String previewUrl = _item.getPreviewUrl();
+
+		if (pictureUrl != null && pictureUrl.length() > 0) {
+			File _pictureFile = new File(uploadPath, pictureUrl);
+			_pictureFile.delete();
 		}
+
+		if (previewUrl != null && previewUrl.length() > 0) {
+			File _previewFile = new File(uploadPath, previewUrl);
+			_previewFile.delete();
+		}
+		
+		int count = service.remove(item);
+		
+		if(count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			rttr.addFlashAttribute("msg", "FAIL");
+		}
+		return "redirect:/item/list";
+	}
 
 	// 미리보기 이미지 표시
 	@ResponseBody

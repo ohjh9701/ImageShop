@@ -45,5 +45,9 @@
 		UPDATE item SET item_name = #{itemName}, price = #{price}, description = #{description}, picture_url = #{pictureUrl}, preview_url = #{previewUrl}
 		WHERE item_id = #{itemId}
 	</update>
+	
+	<delete id="delete">
+		DELETE FROM item WHERE item_id = #{itemId}
+	</delete>
 
 </mapper> 

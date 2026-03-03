@@ -20,7 +20,7 @@
 	<div class="main-wrapper">
 		<div class="container">
 			<h2>T1 Shop 상품 수정</h2>
-			<form:form modelAttribute="item" action="/item/modify" method="post"
+			<form:form modelAttribute="item" action="/item/remove" method="post"
 				enctype="multipart/form-data">
 				<form:hidden path="itemId" />
 				<form:hidden path="pictureUrl" />
@@ -28,13 +28,11 @@
 				<table>
 					<tr>
 						<td><spring:message code="item.itemName" /></td>
-						<td><form:input path="itemName" /></td>
-						<td><font color="red"><form:errors path="itemName" /></font></td>
+						<td><form:input path="itemName" disabled="true"/></td>
 					</tr>
 					<tr class="price">
 						<td><spring:message code="item.itemPrice" /></td>
-						<td><form:input path="price" /></td>
-						<td><font color="red"><form:errors path="price" /></font></td>
+						<td><form:input path="price" disabled="true"/></td>
 					</tr>
 
 					<tr>
@@ -45,28 +43,15 @@
 						<td><spring:message code="item.preview" /></td>
 						<td><img src="display?itemId=${item.itemId}" width="210"></td>
 					</tr>
-
-					<tr>
-						<td><spring:message code="item.itemFile" /></td>
-						<td><input type="file" name="picture" /></td>
-						<td></td>
-					</tr>
-					<tr>
-						<td><spring:message code="item.itemPreviewFile" /></td>
-						<td><input type="file" name="preview" /></td>
-						<td></td>
-
-					</tr>
 					<tr>
 						<td><spring:message code="item.itemDescription" /></td>
-						<td><form:textarea path="description" /></td>
-						<td><form:errors path="description" /></td>
+						<td><form:textarea path="description" disabled="true"/></td>
 					</tr>
 				</table>
 			</form:form>
 			<div>
-				<button type="submit" id="btnModify">
-					<spring:message code="action.modify" />
+				<button type="submit" id="btnRemove">
+					<spring:message code="action.remove" />
 				</button>
 				<button type="submit" id="btnList">
 					<spring:message code="action.list" />
@@ -82,7 +67,7 @@
 	<script>
 		$(document).ready(function() {
 			var formObj = $("#item");
-			$("#btnModify").on("click", function() {
+			$("#btnRemove").on("click", function() {
 				formObj.submit();
 			});
 			$("#btnList").on("click", function() {

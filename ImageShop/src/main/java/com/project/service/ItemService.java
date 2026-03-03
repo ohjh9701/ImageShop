@@ -16,6 +16,8 @@ public interface ItemService {
 
 	public Item read(Item item) throws Exception;
 
-	public void modify(Item item)throws Exception;
+	public int modify(Item item)throws Exception;
+
+	public int remove(Item item)throws Exception;
 
 }
