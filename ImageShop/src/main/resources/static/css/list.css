@@ -91,3 +91,47 @@
     padding: 40px 0;
     color: #999;
 }
+
+/* 1. 테이블 내 버튼 위치 및 기본 스타일 */
+.container table td a[href*="download"] {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: #1a1a1a; /* T1 Black */
+    color: #c69c6d !important; /* T1 Gold 텍스트 */
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 800;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    border: 1px solid #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 2. 마우스 호버 시 T1 Red로 변신 */
+.container table td a[href*="download"]:hover {
+    background-color: #e2012d; /* T1 Red */
+    border-color: #e2012d;
+    color: #ffffff !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(226, 1, 45, 0.4);
+}
+
+/* 3. 클릭 시 눌리는 효과 */
+.container table td a[href*="download"]:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(226, 1, 45, 0.2);
+}
+
+/* 4. 상품명 링크 스타일 (덤으로 세팅!) */
+.container table td a:not([href*="download"]) {
+    color: #1a1a1a;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.container table td a:not([href*="download"]):hover {
+    color: #e2012d;
+    text-decoration: underline;
+}

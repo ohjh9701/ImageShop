@@ -54,7 +54,7 @@
 		<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal" var="pinfo" />
 		</sec:authorize>
-
+		<h2>Coment</h2>
 		<div class="reply_view">
 			<table>
 				<c:choose>

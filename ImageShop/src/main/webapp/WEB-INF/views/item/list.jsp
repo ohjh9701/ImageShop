@@ -18,46 +18,53 @@
 	<jsp:include page="/WEB-INF/views/common/menu.jsp" />
 
 	<!-- 메인화면 작업 영역 시작 -->
-		<div class="container">
-    <h2><spring:message code="item.header.list" /></h2>
-    <div class="list-ctrl-bar">
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <a href="/item/register" class="btn-register">새 상품 등록</a>
-        </sec:authorize>
-    </div>
+	<div class="container">
+		<h2>
+			<spring:message code="item.header.list" />
+		</h2>
 
-    <div class="item-grid">
-        <c:choose>
-            <c:when test="${empty itemList}">
-                <p class="empty-msg"><spring:message code="common.listEmpty" /></p>
-            </c:when>
-            <c:otherwise>
-                <c:forEach items="${itemList}" var="item">
-                    <div class="item-card">
-                        <div class="item-img-box">
-                            <img src="/item/display?itemId=${item.itemId}" onerror="this.src='/img/no-image.png'">
-                        </div>
-                        <div class="item-info">
-                            <div class="item-name">${item.itemName}</div>
-                            <div class="item-price">
-                                <fmt:formatNumber value="${item.price}" pattern="###,###" />원
-                            </div>
-                        </div>
-                        <div class="item-actions">
-                            <sec:authorize access="hasRole('ROLE_ADMIN')">
-                                <a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
-                                <a href="remove?itemId=${item.itemId}" class="btn-remove">삭제</a>
-                            </sec:authorize>
-                            <sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
-                                <a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
-                            </sec:authorize>
-                        </div>
-                    </div>
-                </c:forEach>
-            </c:otherwise>
-        </c:choose>
-    </div>
-</div>
+		<div class="list-ctrl-bar">
+			<sec:authorize access="hasRole('ROLE_ADMIN')">
+				<a href="/item/register" class="btn-register">새 상품 등록</a>
+			</sec:authorize>
+		</div>
+
+		<div class="item-grid">
+			<c:choose>
+				<c:when test="${empty itemList}">
+					<p class="empty-msg">
+						<spring:message code="common.listEmpty" />
+					</p>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${itemList}" var="item">
+						<div class="item-card">
+							<div class="item-img-box">
+								<img src="/item/display?itemId=${item.itemId}"
+									onerror="this.src='/img/no-image.png'">
+							</div>
+							<div class="item-info">
+								<div class="item-name">${item.itemName}</div>
+								<div class="item-price">
+									<fmt:formatNumber value="${item.price}" pattern="###,###" />
+									원
+								</div>
+							</div>
+							<div class="item-actions">
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
+									<a href="remove?itemId=${item.itemId}" class="btn-remove">삭제</a>
+								</sec:authorize>
+								<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
+									<a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
+								</sec:authorize>
+							</div>
+						</div>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</div>
 
 	<!-- 메인화면 작업 영역 끝 -->
 

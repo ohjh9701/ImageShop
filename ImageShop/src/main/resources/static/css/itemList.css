@@ -159,3 +159,39 @@
 .btn-remove { background: #fce8e8; color: #e2012d !important; }
 
 .item-actions a:hover { opacity: 0.8; }
+
+/* 상단 컨트롤 바 (버튼 영역) */
+.list-ctrl-bar {
+    display: flex;
+    justify-content: flex-end; /* 오른쪽 끝으로 밀기 */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0; /* 상품 영역과 구분되는 선 */
+}
+
+/* 새 상품 등록 버튼 스타일 */
+.btn-register {
+    display: inline-block;
+    background-color: #e2012d; /* T1 Red */
+    color: #fff !important;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(226, 1, 45, 0.2);
+}
+
+.btn-register:hover {
+    background-color: #1a1a1a; /* 호버 시 T1 Black */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 상품 그리드 컨테이너 (침범 방지) */
+.item-grid {
+    clear: both; /* 혹시 모를 float 영향 제거 */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+}

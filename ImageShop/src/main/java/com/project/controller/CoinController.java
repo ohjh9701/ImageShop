@@ -1,6 +1,5 @@
 package com.project.controller;
 
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -67,7 +66,7 @@ public class CoinController {
 	public void list(Model model, Authentication authentication) throws Exception {
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		Member member = customUser.getMember();
-		
+		model.addAttribute("member",member);
 		model.addAttribute("list", service.list(member)); 
 	}
 
@@ -75,6 +74,19 @@ public class CoinController {
 	@GetMapping("/success")
 	public String success() throws Exception {
 		return "coin/success";
+	}
+	
+	@GetMapping("/listPay") 
+	@PreAuthorize("hasRole('ROLE_MEMBER')") 
+	public void listPayHistory(Model model, Authentication authentication) 
+	throws Exception { 
+	CustomUser customUser = (CustomUser) 
+	authentication.getPrincipal();
+	
+	Member member = customUser.getMember(); 
+	 
+	 
+	model.addAttribute("list", service.listPayHistory(member)); 
 	}
 
 }

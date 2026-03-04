@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.domain.ChargeCoin;
 import com.project.domain.Member;
+import com.project.domain.PayCoin;
 import com.project.mapper.CoinMapper;
 
 @Service
@@ -28,5 +29,20 @@ public class CoinServiceImpl implements CoinService {
 	@Override
 	public List<ChargeCoin> list(Member member) throws Exception {
 		return mapper.list(member);
+	}
+
+	@Override
+	public int pay(PayCoin payCoin) throws Exception {
+		return mapper.pay(payCoin);
+	}
+
+	@Override
+	public int createPayHistory(PayCoin payCoin) throws Exception {
+		return mapper.createPayHistory(payCoin);
+	}
+
+	@Override
+	public List<PayCoin> listPayHistory(Member member) throws Exception {
+		return mapper.listPayHistory(member);
 	}
 }

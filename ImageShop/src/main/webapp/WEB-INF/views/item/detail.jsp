@@ -23,7 +23,7 @@
 			<spring:message code="item.header.read" />
 		</h2>
 
-		<form:form modelAttribute="item">
+		<form:form modelAttribute="item" action="buy">
 			<form:hidden path="itemId" />
 			<form:hidden path="pictureUrl" />
 			<form:hidden path="previewUrl" />
@@ -49,9 +49,11 @@
 		</form:form>
 		<div>
 			<!-- 구매하기 버튼 추가 -->
+			<sec:authorize access="hasAnyRole('ROLE_MEMBER')">
 			<button type="submit" id="btnBuy">
 				<spring:message code="action.buy" />
 			</button>
+			</sec:authorize>
 			<button type="submit" id="btnList">
 				<spring:message code="action.list" />
 			</button>

@@ -87,6 +87,7 @@
 		SELECT user_no FROM MEMBER WHERE user_id = #{username}
 	</select>
 	
+	<!-- 코인 정보 리턴 -->
 	<select id="getCoin">
 		SELECT coin FROM MEMBER WHERE user_no = #{userNo}
 	</select>

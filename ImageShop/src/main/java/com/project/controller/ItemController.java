@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
-import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
@@ -181,27 +180,37 @@ public class ItemController {
 		}
 		return "redirect:/item/list";
 	}
-	/*
+
 	// 상품 구매 요청을 처리한다.
-		@PostMapping("/buy")
-		@PreAuthorize("hasRole('ROLE_MEMBER')")
-		public String buy(Item item, RedirectAttributes rttr, Authentication authentication) throws Exception {
-			CustomUser customUser = (CustomUser) authentication.getPrincipal();
-			Member member = customUser.getMember();
-			int userNo = member.getUserNo();
-			
-			member.setCoin(memberService.getCoin(userNo));
+	@PostMapping("/buy")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
+	public String buy(Item item, RedirectAttributes rttr, Authentication authentication) throws Exception {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		Member member = customUser.getMember();
 
-			Item _item = service.read(item);
-			
-			userItemService.register(member, _item);
-			
-			String message = messageSource.getMessage("item.purchaseComplete", null, Locale.KOREAN);
-			rttr.addFlashAttribute("msg", message);
+		member.setCoin(memberService.getCoin(member));
 
-			return "redirect:/item/success";
+		Item _item = service.read(item);
+
+		int count = userItemService.register(member, _item);
+
+		// String message = messageSource.getMessage("item.purchaseComplete", null,
+		// Locale.KOREAN);
+		if (count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			rttr.addFlashAttribute("msg", "FALI");
 		}
-	*/
+		return "redirect:/item/success";
+	}
+
+	// 상품 구매 성공 페이지를 표시한다.
+	@GetMapping("/success")
+	public String success() throws Exception {
+
+		return "item/success";
+	}
+
 	// 미리보기 이미지 표시
 	@ResponseBody
 	@RequestMapping("/display")
@@ -306,7 +315,5 @@ public class ItemController {
 
 		return createdFileName;
 	}
-
-	
 
 }

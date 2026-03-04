@@ -110,7 +110,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int getCoin(int userNo) throws Exception {
-		return mapper.getCoin(userNo);
+	public int getCoin(Member member) throws Exception {
+		return mapper.getCoin(member);
 	}
 }

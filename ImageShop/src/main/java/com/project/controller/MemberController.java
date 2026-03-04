@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.common.domain.CodeLabelValue;
+import com.project.common.security.domain.CustomUser;
 import com.project.domain.Member;
 import com.project.service.CodeService;
 import com.project.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Slf4j
 @Controller
@@ -171,5 +175,15 @@ public class MemberController {
 		// 회원 테이블에 데이터가 존재하면 최초 관리자를 생성할 수 없으므로 실패 페이지로 이동한다.
 		return "redirect:/user/setupFailure";
 	}
+	
+	@GetMapping("/myPage")
+	public void getMethodName(Model model, Authentication authentication) {
+		
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		Member member = customUser.getMember();
+		
+		model.addAttribute("member",member);
+	}
+	
 
 }

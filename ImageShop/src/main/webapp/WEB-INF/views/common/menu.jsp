@@ -17,7 +17,7 @@
 				<!-- 회원 게시판를 메뉴에 추가한다. -->
 				<td width="20%"><a href="/board/list"><spring:message
 							code="menu.board.member" /></a></td>
-							<!-- 상품리스트를 메뉴에 추가한다. -->
+				<!-- 상품리스트를 메뉴에 추가한다. -->
 				<td width="20%"><a href="/item/list"><spring:message
 							code="menu.item.member" /></a></td>
 				<!-- 공지사항을 메뉴에 추가한다. -->
@@ -33,12 +33,12 @@
 					<!-- 회원 게시판를 메뉴에 추가한다. -->
 					<td width="10%"><a href="/board/list"><spring:message
 								code="menu.board.member" /></a></td>
-								<!-- 상품리스트를 메뉴에 추가한다. -->
-				<td width="10%"><a href="/item/list"><spring:message
-							code="menu.item.member" /></a></td>
-								<!-- 공지사항을 메뉴에 추가한다. -->
-				<td width="10%"><a href="/notice/list"><spring:message
-							code="menu.notice.member" /></a></td>
+					<!-- 상품리스트를 메뉴에 추가한다. -->
+					<td width="10%"><a href="/item/list"><spring:message
+								code="menu.item.member" /></a></td>
+					<!-- 공지사항을 메뉴에 추가한다. -->
+					<td width="10%"><a href="/notice/list"><spring:message
+								code="menu.notice.member" /></a></td>
 					<td width="10%"><a href="/user/list"><spring:message
 								code="menu.user.admin" /></a></td>
 					<td width="10%"><a href="/codegroup/list"><spring:message
@@ -50,17 +50,22 @@
 				<!-- 회원 권한을 가진 사용자인 경우 true -->
 				<sec:authorize access="hasRole('ROLE_MEMBER')">
 					<!-- 회원 게시판를 메뉴에 추가한다. -->
-					<td width="12%"><a href="/board/list">T1 커뮤니티</a></td>
-							<!-- 상품리스트를 메뉴에 추가한다. -->
-				<td width="12%"><a href="/item/list"><spring:message
-							code="menu.item.member" /></a></td>
+					<td width="10%"><a href="/board/list">T1 커뮤니티</a></td>
+					<!-- 상품리스트를 메뉴에 추가한다. -->
+					<td width="10%"><a href="/item/list"><spring:message
+								code="menu.item.member" /></a></td>
 					<!-- 공지사항을 메뉴에 추가한다. -->
-				<td width="12%"><a href="/notice/list"><spring:message
-							code="menu.notice.member" /></a></td>
-							<!-- 충전 메뉴를 추가한다. -->
-				<td width="12%"><a href="/coin/charge">코인충전</a></td>
-							<!-- 충전 메뉴를 추가한다. -->
-				<td width="12%"><a href="/coin/list">충전내역</a></td>
+					<td width="10%"><a href="/notice/list"><spring:message
+								code="menu.notice.member" /></a></td>
+					<!-- 충전 메뉴를 추가한다. -->
+					<td width="10%"><a href="/coin/charge">코인충전</a></td>
+					<!-- 충전 메뉴를 추가한다. -->
+					<td width="10%"><a href="/coin/list">충전내역</a></td>
+					<!-- 구매 상품과 구매 내역을 메뉴에 추가한다. -->
+					<td width="10%"><a href="/useritem/list"><spring:message
+								code="menu.useritem.list" /></a></td>
+					<td width="10%"><a href="/coin/listPay"><spring:message
+								code="menu.coin.listPay" /></a></td>
 				</sec:authorize>
 			</sec:authorize>
 
@@ -75,10 +80,9 @@
 					</div>
 				</sec:authorize> <sec:authorize access="isAuthenticated()">
 					<div class="user-info">
-						<span class="user-name"> <span class="user-id"> <sec:authentication
-									property="principal.username" />
-						</span>님
-						</span> <a href="/auth/logout" class="logout-link"> <spring:message
+						<a href="/user/myPage" class="user-id"><sec:authentication
+									property="principal.username" /></a>
+						<a href="/auth/logout" class="logout-link"> <spring:message
 								code="header.logout" />
 						</a>
 					</div>
