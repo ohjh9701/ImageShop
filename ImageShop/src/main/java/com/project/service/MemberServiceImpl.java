@@ -108,4 +108,9 @@ public class MemberServiceImpl implements MemberService {
 	public Member readByNo(String username) throws Exception {
 		return mapper.readByNo(username);
 	}
+
+	@Override
+	public int getCoin(int userNo) throws Exception {
+		return mapper.getCoin(userNo);
+	}
 }

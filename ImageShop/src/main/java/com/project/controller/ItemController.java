@@ -4,16 +4,19 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -24,8 +27,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.common.security.domain.CustomUser;
 import com.project.domain.Item;
+import com.project.domain.Member;
 import com.project.service.ItemService;
+import com.project.service.MemberService;
+import com.project.service.UserItemService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,6 +46,18 @@ public class ItemController {
 
 	@Value("${upload.path}")
 	private String uploadPath;
+
+	// 업무로직을 처리할 서비스 객체를 필드로 선언한다.
+	@Autowired
+	private MemberService memberService;
+
+	// 사용자구매 비즈니스 서비스
+	@Autowired
+	private UserItemService userItemService;
+
+	// 메시지를 처리할 MessageSource를 필드로 선언한다.
+	@Autowired
+	private MessageSource messageSource;
 
 	// 상품 등록 페이지
 	@GetMapping("/register")
@@ -75,14 +94,14 @@ public class ItemController {
 		List<Item> itemList = service.list();
 		model.addAttribute("itemList", itemList);
 	}
-	
-	// 상품 상세 페이지 
-	@GetMapping("/detail") 
-	public String read(Item item, Model model) throws Exception { 
-	Item _item = service.read(item); 
-	model.addAttribute(_item); 
-	return "item/detail"; 
-	} 
+
+	// 상품 상세 페이지
+	@GetMapping("/detail")
+	public String read(Item item, Model model) throws Exception {
+		Item _item = service.read(item);
+		model.addAttribute(_item);
+		return "item/detail";
+	}
 
 	// 상품 수정 페이지
 	@GetMapping("/modify")
@@ -104,7 +123,7 @@ public class ItemController {
 			String pictureUrl = item2.getPictureUrl();
 			File _pictureFile = new File(uploadPath, pictureUrl);
 			_pictureFile.delete();
-			
+
 			item.setPictureUrl(createdFilename);
 		}
 
@@ -116,7 +135,7 @@ public class ItemController {
 			String previewUrl = item2.getPreviewUrl();
 			File _previewFile = new File(uploadPath, previewUrl);
 			_previewFile.delete();
-			
+
 			item.setPreviewUrl(createdFilename);
 		}
 		service.modify(item);
@@ -138,7 +157,7 @@ public class ItemController {
 	@PostMapping("/remove")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String remove(Item item, RedirectAttributes rttr) throws Exception {
-		//외장하드에 있는 상품 이미지를 제거를 먼저 한다
+		// 외장하드에 있는 상품 이미지를 제거를 먼저 한다
 		Item _item = service.read(item);
 		String pictureUrl = _item.getPictureUrl();
 		String previewUrl = _item.getPreviewUrl();
@@ -152,17 +171,37 @@ public class ItemController {
 			File _previewFile = new File(uploadPath, previewUrl);
 			_previewFile.delete();
 		}
-		
+
 		int count = service.remove(item);
-		
-		if(count != 0) {
+
+		if (count != 0) {
 			rttr.addFlashAttribute("msg", "SUCCESS");
 		} else {
 			rttr.addFlashAttribute("msg", "FAIL");
 		}
 		return "redirect:/item/list";
 	}
+	/*
+	// 상품 구매 요청을 처리한다.
+		@PostMapping("/buy")
+		@PreAuthorize("hasRole('ROLE_MEMBER')")
+		public String buy(Item item, RedirectAttributes rttr, Authentication authentication) throws Exception {
+			CustomUser customUser = (CustomUser) authentication.getPrincipal();
+			Member member = customUser.getMember();
+			int userNo = member.getUserNo();
+			
+			member.setCoin(memberService.getCoin(userNo));
 
+			Item _item = service.read(item);
+			
+			userItemService.register(member, _item);
+			
+			String message = messageSource.getMessage("item.purchaseComplete", null, Locale.KOREAN);
+			rttr.addFlashAttribute("msg", message);
+
+			return "redirect:/item/success";
+		}
+	*/
 	// 미리보기 이미지 표시
 	@ResponseBody
 	@RequestMapping("/display")
@@ -267,5 +306,7 @@ public class ItemController {
 
 		return createdFileName;
 	}
+
+	
 
 }

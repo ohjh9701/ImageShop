@@ -86,4 +86,8 @@
 	<select id="readByNo">
 		SELECT user_no FROM MEMBER WHERE user_id = #{username}
 	</select>
+	
+	<select id="getCoin">
+		SELECT coin FROM MEMBER WHERE user_no = #{userNo}
+	</select>
 </mapper>

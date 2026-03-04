@@ -22,4 +22,6 @@ public interface MemberService {
 
 	public Member readByNo(String username) throws Exception;
 
+	public int getCoin(int userNo) throws Exception;
+
 }

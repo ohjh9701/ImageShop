@@ -18,7 +18,7 @@
 	</resultMap>
 
 	<insert id="replyRegister">
-		insert into reply values(reply_seq.nextval, #{boardNo}, #{userNo}, #{content}, sysdate)
+		insert into reply values(reply_seq.nextval, #{userNo}, #{boardNo}, #{content}, sysdate)
 	</insert>
 	
 	<select id="list" resultMap="replyMap">
@@ -38,5 +38,9 @@ WHERE b.board_no = #{boardNo} order by r.reply_no asc
 	<delete id="delete">
 		DELETE FROM Reply WHERE reply_no = #{replyNo}
 	</delete>
+	
+	<update id="update">
+		UPDATE REPLY SET CONTENT = #{content} WHERE reply_no = #{replyNo}
+	</update>
 
 </mapper> 

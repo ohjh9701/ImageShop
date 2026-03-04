@@ -13,4 +13,6 @@ public interface ReplyMapper {
 
 	public void delete(Reply reply)throws Exception;
 
+	public void update(Reply reply)throws Exception;
+
 }

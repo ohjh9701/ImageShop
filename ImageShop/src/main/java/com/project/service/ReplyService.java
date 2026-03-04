@@ -13,4 +13,6 @@ public interface ReplyService {
 
 	public void delete(Reply reply)throws Exception;
 
+	public void modify(Reply reply)throws Exception;
+
 }

@@ -1,3 +1,18 @@
+-- ******************************************
+--3.사용자 정의 C## 기능을 잠금 후 사용자 정의
+ALTER SESSION SET "_ORACLE_SCRIPT"=true;
+--3.2 기존사용자가 model이 있다면 삭제
+DROP USER eyetalk CASCADE;
+--3.3 사용자 정의 이름 : model, 비밀번호 : model, 테이블스페이스, TEMPORARY 스페이스
+CREATE USER eyetalk IDENTIFIED BY eyetalk
+    DEFAULT TABLESPACE USERS
+    TEMPORARY TABLESPACE TEMP;
+--3.4 권한 부여
+GRANT connect, resource, dba to eyetalk;
+--3.5 활성 계정 부여로 즉시 로그인 가능
+ALTER USER eyetalk ACCOUNT UNLOCK;
+-- ******************************************
+
 CREATE TABLE CODE_GROUP(
     GROUP_CODE VARCHAR2(3) NOT NULL,
     GROUP_NAME VARCHAR2(30) NOT NULL,
@@ -174,7 +189,7 @@ START WITH 1
 INCREMENT BY 1;
 
 
-
+drop table user_item;
 CREATE TABLE USER_ITEM (
     USER_ITEM_NO NUMBER(10) NOT NULL,
     USER_NO NUMBER(10) NOT NULL,
@@ -183,12 +198,13 @@ CREATE TABLE USER_ITEM (
     PRIMARY KEY (USER_ITEM_NO)
 );
 
+drop sequence user_item_seq;
 CREATE SEQUENCE USER_ITEM_SEQ
 START WITH 1
 INCREMENT BY 1;
 
 
-
+drop table pay_coin_history;
 CREATE TABLE PAY_COIN_HISTORY(
     HISTORY_NO NUMBER(10) NOT NULL,
     USER_NO NUMBER(10) NOT NULL,
@@ -198,6 +214,7 @@ CREATE TABLE PAY_COIN_HISTORY(
     PRIMARY KEY (HISTORY_NO)
 );
 
+drop sequence pay_coin_history_seq;
 CREATE SEQUENCE PAY_COIN_HISTORY_SEQ
 START WITH 1
 INCREMENT BY 1;
@@ -206,9 +223,13 @@ select * from member;
 select * from member_auth;
 
 delete from member where user_id = 'eee';
+delete from member_auth where user_no = 2;
+
+delete from reply;
 
 /* 댓글기능 추가 */
 --댓글 테이블
+drop table reply;
 CREATE TABLE REPLY (
     REPLY_NO NUMBER(10) NOT NULL,
     USER_NO NUMBER(5) NOT NULL,
@@ -220,6 +241,11 @@ ALTER TABLE REPLY ADD CONSTRAINT REPLY_NO_PK PRIMARY KEY(REPLY_NO);
 ALTER TABLE REPLY ADD CONSTRAINT USER_NO_PK FOREIGN KEY (USER_NO) REFERENCES MEMBER(USER_NO);
 ALTER TABLE REPLY ADD CONSTRAINT BOARD_NO_PK FOREIGN KEY (BOARD_NO)REFERENCES BOARD(BOARD_NO);
 
+drop sequence reply_seq;
 CREATE SEQUENCE REPLY_SEQ
 START WITH 1
 INCREMENT BY 1;
+
+select * from reply;
+
+commit;

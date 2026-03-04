@@ -29,5 +29,10 @@ public class ReplyServiceImpl implements ReplyService{
 	public void delete(Reply reply) throws Exception {
 		mapper.delete(reply);
 	}
+
+	@Override
+	public void modify(Reply reply) throws Exception {
+		mapper.update(reply);
+	}
 	
 }

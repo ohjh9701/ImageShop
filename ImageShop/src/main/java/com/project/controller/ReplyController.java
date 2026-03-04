@@ -15,6 +15,10 @@ import com.project.service.MemberService;
 import com.project.service.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 @Slf4j
 @Controller
@@ -44,13 +48,18 @@ public class ReplyController {
 	
 	@PostMapping("/delete")
 	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
-	public String repliesDelete(Reply reply) {
-		try {
+	public String repliesDelete(Reply reply) throws Exception {
 			service.delete(reply);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		return "redirect:/board/detail?boardNo=" + reply.getBoardNo();
 	}
+	
+	@PostMapping("/modify")
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')")
+	public String repliesUpdate(Reply reply) throws Exception {
+		service.modify(reply);
+		return "redirect:/board/detail?boardNo=" + reply.getBoardNo();
+	}
+	
+	
 	
 }

@@ -60,30 +60,52 @@
 				<c:choose>
 					<c:when test="${empty replyList}">
 						<tr>
-							<td colspan="4">여러분의 소중한 댓글을 남겨주세요.</td>
+							<td colspan="4" class="empty-msg">여러분의 소중한 댓글을 남겨주세요.</td>
 						</tr>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${replyList}" var="reply">
 							<tr>
-								<td align="center">${reply.member.userId}</td>
-								<td align="center">${reply.content}</td>
-								<td align="center"><fmt:formatDate
+								<td align="center" style="width: 130px;">${reply.member.userId}</td>
+
+								<td align="left" class="reply-content-area">
+									<div id="reply-text-${reply.replyNo}">${reply.content}</div>
+
+									<form action="/reply/modify" method="post"
+										id="reply-edit-form-${reply.replyNo}"
+										style="display: none; margin: 0;">
+										<input type="hidden" name="replyNo" value="${reply.replyNo}">
+										<input type="hidden" name="boardNo" value="${board.boardNo}">
+										<textarea name="content" class="inline-edit-textarea">${reply.content}</textarea>
+										<div class="inline-edit-btns">
+											<button type="submit" class="btn-reply-save">저장</button>
+											<button type="button" class="btn-reply-cancel"
+												onclick="cancelEdit(${reply.replyNo})">취소</button>
+										</div>
+									</form>
+								</td>
+
+								<td align="center" style="width: 140px;"><fmt:formatDate
 										pattern="yyyy-MM-dd HH:mm" value="${reply.regDate}" /></td>
 
-								<sec:authorize access="isAuthenticated()">
-									<c:if test="${pinfo.username eq reply.member.userId}">
-										<td>
-											<form action="/reply/delete" method="post"
-												style="display: inline;">
-												<input type="hidden" name="replyNo" value="${reply.replyNo}">
-												<input type="hidden" name="boardNo" value="${board.boardNo}">
-												<button type="submit" id="btnDelete"
-													onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
-											</form>
-										</td>
-									</c:if>
-								</sec:authorize>
+								<td class="reply-action-btns" style="width: 150px;"><sec:authorize
+										access="isAuthenticated()">
+										<c:if test="${pinfo.username eq reply.member.userId}">
+											<div id="action-btns-${reply.replyNo}">
+												<button type="button" class="btn-reply-modify"
+													onclick="showEditForm(${reply.replyNo})">수정</button>
+
+												<form action="/reply/delete" method="post"
+													style="display: inline-block; margin: 0;">
+													<input type="hidden" name="replyNo"
+														value="${reply.replyNo}"> <input type="hidden"
+														name="boardNo" value="${board.boardNo}">
+													<button type="submit" class="btn-reply-delete"
+														onclick="return confirm('정말 삭제하시겠습니까?')">삭제</button>
+												</form>
+											</div>
+										</c:if>
+									</sec:authorize></td>
 							</tr>
 						</c:forEach>
 					</c:otherwise>
@@ -184,6 +206,26 @@
 										+ "&keyword=" + keyword;
 							});
 				});
+		
+		function showEditForm(replyNo) {
+		    $('.inline-edit-textarea').parent().hide();
+		    $('span[id^="reply-text-"]').show();
+		    $('.reply-action-btns').show();
+
+		    $('#reply-text-' + replyNo).hide();
+		    $('#action-btns-' + replyNo).hide();
+
+		    $('#reply-edit-form-' + replyNo).fadeIn(200);
+		}
+
+		function cancelEdit(replyNo) {
+		    $('#reply-edit-form-' + replyNo).hide();
+		    
+		    $('#reply-text-' + replyNo).show();
+		    $('#action-btns-' + replyNo).show();
+		}
 	</script>
+
+
 </body>
 </html>
