@@ -177,10 +177,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("/myPage")
-	public void getMethodName(Model model, Authentication authentication) {
+	public void getMethodName(Model model, Authentication authentication) throws Exception {
 		
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		Member member = customUser.getMember();
+		
+		String groupCode = "A00";
+		List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
+		model.addAttribute("jobList", jobList);
 		
 		model.addAttribute("member",member);
 	}
