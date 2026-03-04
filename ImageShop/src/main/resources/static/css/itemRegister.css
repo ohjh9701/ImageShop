@@ -152,3 +152,21 @@
 
 #btnRegister:hover { background-color: #b00024; }
 #btnBuy:hover { background-color: #555; }
+
+/* 카테고리 셀렉트 박스 스타일 */
+.select-category {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.select-category:focus {
+    outline: none;
+    border-color: #e2012d; /* T1 Red */
+    box-shadow: 0 0 5px rgba(226, 1, 45, 0.1);
+}

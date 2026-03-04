@@ -31,4 +31,6 @@ public interface MemberMapper {
 
 	public int getCoin(Member member) throws Exception;
 
+	public int edit(Member member) throws Exception;
+
 }

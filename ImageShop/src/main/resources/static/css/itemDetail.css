@@ -1,0 +1,137 @@
+/* 1. 전체 컨테이너 제약 */
+.container {
+    max-width: 1280px; /* 지훈님이 말씀하신 마지노선 */
+    margin: 50px auto;
+    padding: 0 40px;   /* 양옆 최소 여백 확보 */
+    box-sizing: border-box;
+}
+
+/* 2. 상세 페이지 래퍼 (Flex 비율 조정) */
+.item-detail-wrapper {
+    display: flex;
+    gap: 80px;         /* 이미지와 텍스트 사이의 시원한 간격 */
+    align-items: flex-start;
+}
+
+/* 3. 왼쪽 이미지 섹션 (더 크게!) */
+.item-image-section {
+    flex: 1.5;         /* 텍스트보다 더 넓은 비중 할당 */
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    overflow: hidden;
+    position: sticky;  /* 스크롤 내려도 이미지는 고정되어 보이게 (트렌디한 샵 스타일) */
+    top: 100px;
+}
+
+.main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* 4. 오른쪽 정보 섹션 */
+.item-info-section {
+    flex: 1;           /* 이미지보다 좁게 가져가서 밸런스 유지 */
+    padding: 10px 0;
+}
+
+/* 5. 상품 타이틀 및 가격 */
+.item-title {
+    font-size: 38px;   /* 폰트 크기를 키워 존재감 부여 */
+    font-weight: 900;
+    color: #1a1a1a;
+    line-height: 1.2;
+    margin: 15px 0 30px 0;
+    word-break: keep-all; /* 단어 단위 줄바꿈으로 깔끔하게 */
+}
+
+.item-category {
+    font-size: 19px;   /* 폰트 크기를 키워 존재감 부여 */
+    font-weight: 700;
+    color: #858585;
+    line-height: 1.2;
+    margin: 15px 0 30px 0;
+    word-break: keep-all; /* 단어 단위 줄바꿈으로 깔끔하게 */
+}
+
+.item-price-box {
+    margin-bottom: 40px;
+    padding: 30px 0;
+    border-top: 2px solid #1a1a1a; /* 강렬한 블랙 라인 */
+    border-bottom: 1px solid #eee;
+}
+
+.item-price {
+    font-size: 28px;
+    font-weight: 800;
+    color: #e2012d;     /* 가격에 T1 Red 포인트 */
+}
+
+/* 6. 버튼 영역 (와이드하게) */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 50px;
+}
+
+.action-buttons button {
+    width: 100%;
+    height: 65px;      /* 버튼 높이를 키워 클릭감을 높임 */
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+/* 버튼 스타일링 */
+.action-buttons {
+    display: flex;
+    flex-direction: column; /* 세로 배치 (T1 샵 스타일) */
+    gap: 12px;
+}
+
+.action-buttons button {
+    width: 100%;
+    padding: 18px 0;
+    font-size: 16px;
+    font-weight: 900;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-t1-red {
+    background-color: #e2012d;
+    color: #fff;
+    border: none;
+}
+
+.btn-t1-red:hover {
+    background-color: #b00024;
+}
+
+.btn-t1-outline {
+    background-color: #fff;
+    color: #1a1a1a;
+    border: 1px solid #ddd;
+}
+
+.btn-t1-outline:hover {
+    background-color: #1a1a1a;
+    color: #c69c6d; /* Gold */
+}
+
+/* 반응형 대응 (화면이 작아질 때) */
+@media (max-width: 1024px) {
+    .item-detail-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    .item-image-section, .item-info-section {
+        width: 100%;
+    }
+}
+

@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>T1 Notice List</title>
-<link rel="stylesheet" href="/css/list.css">
+<link rel="stylesheet" href="/css/userList.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -22,6 +22,7 @@
 		<h2>
 			<spring:message code="useritem.header.list" />
 		</h2>
+		<a href="/user/myPage" class="btn-register">마이페이지</a>
 
 		<table border="1">
 			<tr>

@@ -75,7 +75,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public int remove(Member member) throws Exception {
 		// 회원권한 삭제
-		mapper.deleteAuth(member.getUserNo());
+		//mapper.deleteAuth(member.getUserNo());
 		
 		return mapper.delete(member);
 	}
@@ -110,7 +110,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public int getCoin(Member member) throws Exception {
 		return mapper.getCoin(member);
+	}
+
+	@Override
+	@Transactional
+	public int edit(Member member) throws Exception {
+		return mapper.edit(member);
 	}
 }

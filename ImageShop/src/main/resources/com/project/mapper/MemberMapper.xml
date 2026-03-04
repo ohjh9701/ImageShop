@@ -13,6 +13,7 @@
 		<result property="enabled" column="enabled" />
 		<result property="regDate" column="reg_date" />
 		<result property="updDate" column="upd_date" />
+		<result property="enabled" column="enabled" />
 		<collection property="authList" resultMap="authMap">
 		</collection>
 	</resultMap>
@@ -40,7 +41,7 @@
 		user_name,
 		(SELECT code_name FROM code_detail WHERE group_code = 'A00' AND code_value =
 		job) AS job, coin, reg_date
-		FROM member ORDER BY reg_date DESC
+		FROM member WHERE enabled = 1 ORDER BY reg_date DESC
 	</select>
 
 	<!-- 상세 조회 -->
@@ -58,11 +59,11 @@
 		A.user_no WHERE M.user_id = #{userId}
 	</select>
 
-	<!-- 권한 삭제 처리 -->
+	<!-- 권한 삭제 처리 
 	<delete id="deleteAuth">
 		DELETE FROM member_auth WHERE user_no = #{userNo}
 	</delete>
-	
+	-->
 	<!-- 권한 수정 처리 -->
 	<insert id="updateAuth">
 		INSERT INTO member_auth VALUES(#{userNo}, #{auth})
@@ -75,7 +76,7 @@
 	
 	<!-- 삭제 처리 -->	
 	<delete id="delete">
-		DELETE FROM member WHERE user_no = #{userNo}
+		UPDATE MEMBER SET enabled = 0 where user_no = #{userNo}
 	</delete>
 	
 	<!-- 회원수 조회 -->
@@ -91,4 +92,8 @@
 	<select id="getCoin">
 		SELECT coin FROM MEMBER WHERE user_no = #{userNo}
 	</select>
+	
+	<update id="edit">
+		UPDATE MEMBER SET user_name = #{userName}, user_pw = #{userPw} WHERE user_no = #{userNo}
+	</update>
 </mapper>

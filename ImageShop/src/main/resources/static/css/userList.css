@@ -20,7 +20,8 @@
 }
 
 /* 등록 버튼 (Action New) */
-.container a[href="/user/register"] {
+.container a[href="/user/register"],
+.container a[href="/user/myPage"] {
     display: inline-block;
     float: right;
     background-color: #e2012d;
@@ -33,7 +34,8 @@
     margin-bottom: 15px;
 }
 
-.container a[href="/user/register"]:hover {
+.container a[href="/user/register"]:hover,
+.container a[href="/user/myPage"]:hover {
     background-color: #1a1a1a; /* 호버 시 블랙 */
 }
 

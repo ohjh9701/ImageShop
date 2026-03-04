@@ -29,15 +29,15 @@
 			</sec:authorize>
 		</div>
 
-		<div class="item-grid">
-			<c:choose>
-				<c:when test="${empty itemList}">
-					<p class="empty-msg">
-						<spring:message code="common.listEmpty" />
-					</p>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${itemList}" var="item">
+		<div class="category-section">
+			<h3 class="category-title">
+				T1 OFFICIAL KIT <span class="sub-title">| T1 팀 유니폼</span>
+			</h3>
+			<div class="item-grid">
+				<c:set var="tkExists" value="false" />
+				<c:forEach items="${itemList}" var="item">
+					<c:if test="${item.category eq 'Team-Kit'}">
+						<c:set var="tkExists" value="true" />
 						<div class="item-card">
 							<div class="item-img-box">
 								<img src="/item/display?itemId=${item.itemId}"
@@ -45,6 +45,7 @@
 							</div>
 							<div class="item-info">
 								<div class="item-name">${item.itemName}</div>
+								<div class="item-category">${item.category}</div>
 								<div class="item-price">
 									<fmt:formatNumber value="${item.price}" pattern="###,###" />
 									원
@@ -52,17 +53,58 @@
 							</div>
 							<div class="item-actions">
 								<sec:authorize access="hasRole('ROLE_ADMIN')">
-									<a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
 									<a href="remove?itemId=${item.itemId}" class="btn-remove">삭제</a>
+									<a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
 								</sec:authorize>
-								<sec:authorize access="hasAnyRole('ROLE_MEMBER', 'ROLE_ADMIN')">
-									<a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
-								</sec:authorize>
+								<a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
 							</div>
 						</div>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+					</c:if>
+				</c:forEach>
+				<c:if test="${not tkExists}">
+					<p class="empty-msg">등록된 Team-Kit 상품이 없습니다.</p>
+				</c:if>
+			</div>
+		</div>
+
+		<hr class="section-divider">
+
+		<div class="category-section">
+			<h3 class="category-title">
+				T1 COLLECTION <span class="sub-title">| T1 콜라보레이션</span>
+			</h3>
+			<div class="item-grid">
+				<c:set var="colExists" value="false" />
+				<c:forEach items="${itemList}" var="item">
+					<c:if test="${item.category eq 'Collaboration'}">
+						<c:set var="colExists" value="true" />
+						<div class="item-card">
+							<div class="item-img-box">
+								<img src="/item/display?itemId=${item.itemId}"
+									onerror="this.src='/img/no-image.png'">
+							</div>
+							<div class="item-info">
+								<div class="item-name">${item.itemName}</div>
+								<div class="item-category">${item.category}</div>
+								<div class="item-price">
+									<fmt:formatNumber value="${item.price}" pattern="###,###" />
+									원
+								</div>
+							</div>
+							<div class="item-actions">
+								<sec:authorize access="hasRole('ROLE_ADMIN')">
+									<a href="remove?itemId=${item.itemId}" class="btn-remove">삭제</a>
+									<a href="modify?itemId=${item.itemId}" class="btn-edit">수정</a>
+								</sec:authorize>
+								<a href="detail?itemId=${item.itemId}" class="btn-read">상세보기</a>
+							</div>
+						</div>
+					</c:if>
+				</c:forEach>
+				<c:if test="${not colExists}">
+					<p class="empty-msg">등록된 COLLECTION 상품이 없습니다.</p>
+				</c:if>
+			</div>
 		</div>
 	</div>
 

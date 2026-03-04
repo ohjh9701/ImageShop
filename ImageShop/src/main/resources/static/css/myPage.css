@@ -38,7 +38,7 @@
 /* 카드 왼쪽 (프로필 이미지 영역) */
 .card-left {
     flex: 1;
-    background: linear-gradient(135deg, #222 0%, #111 100%);
+    background: linear-gradient(135deg, #c69c6d 0%, #d8bd8f 100%);
     padding: 50px;
     display: flex;
     flex-direction: column;
@@ -121,35 +121,66 @@
     border: 1px solid #444;
 }
 
-/* 3. 하단 버튼 영역 */
+/* 3. 하단 버튼 영역 (4개 버튼 최적화) */
 .mypage-actions {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2열 배치 */
     gap: 15px;
-    margin-top: 40px;
+    width: 100%;
+    max-width: 800px; /* 카드 너비에 맞춰 조절 */
+    margin: 40px auto 0;
 }
 
 .mypage-actions button {
-    padding: 15px 40px;
-    font-size: 15px;
+    padding: 18px 0; /* 세로 높이 확보 */
+    font-size: 14px;
     font-weight: 800;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
     border: none;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
+/* [회원정보 수정] - 차분한 그레이 */
 #btnEdit {
-    background-color: #eee;
-    color: #1a1a1a;
+    background-color: #f4f4f4;
+    color: #444;
+    border: 1px solid #ddd;
 }
 
+/* [구매내역] - T1 Black & Gold 포인트 */
+#btnUserItemList {
+    background-color: #1a1a1a;
+    color: #c69c6d;
+    border: 1px solid #c69c6d;
+}
+
+/* [코인 충전 내역] - 짙은 그레이 */
 #btnCoinHistory {
-    background-color: #e2012d;
+    background-color: #444;
     color: #fff;
 }
 
-#btnEdit:hover, #btnCoinHistory:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+/* [코인 충전] - T1 Red (가장 강조) */
+#btnCoinCharge {
+    background: linear-gradient(135deg, #e2012d 0%, #b00024 100%);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(226, 1, 45, 0.2);
+}
+
+/* 호버 공통 효과 */
+.mypage-actions button:hover {
+    transform: translateY(-4px);
+    filter: brightness(1.1);
+}
+
+#btnCoinCharge:hover {
+    box-shadow: 0 8px 25px rgba(226, 1, 45, 0.3);
+}
+
+/* 클릭 시 눌림 효과 */
+.mypage-actions button:active {
+    transform: translateY(1px);
 }

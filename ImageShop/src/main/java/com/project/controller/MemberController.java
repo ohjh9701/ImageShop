@@ -18,11 +18,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.common.domain.CodeLabelValue;
 import com.project.common.security.domain.CustomUser;
 import com.project.domain.Member;
+import com.project.exception.NotMyItemException;
 import com.project.service.CodeService;
 import com.project.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Slf4j
@@ -180,6 +183,18 @@ public class MemberController {
 	public void getMethodName(Model model, Authentication authentication) throws Exception {
 		
 		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		Member member = service.read(customUser.getMember());
+		
+		String groupCode = "A00";
+		List<CodeLabelValue> jobList = codeService.getCodeList(groupCode);
+		model.addAttribute("jobList", jobList);
+		
+		model.addAttribute("member",member);
+	}
+	
+	@GetMapping("/edit")
+	public void memberEditForm(Model model, Authentication authentication) throws Exception {
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
 		Member member = customUser.getMember();
 		
 		String groupCode = "A00";
@@ -188,6 +203,26 @@ public class MemberController {
 		
 		model.addAttribute("member",member);
 	}
+	
+	@PostMapping("/edit")
+	public String memberEdit(Member member, RedirectAttributes rttr) throws Exception {
+		
+		// 비밀번호 암호화
+		String inputPassword = member.getUserPw();
+		member.setUserPw(passwordEncoder.encode(inputPassword));
+		
+		int count = service.edit(member);
+		
+		if(count != 0) {
+			rttr.addFlashAttribute("msg", "SUCCESS");
+		} else {
+			throw new Exception("회원 정보 수정에 실패하였습니다.");
+		}
+		
+		return "redirect:/user/myPage";
+	}
+	
+	
 	
 
 }

@@ -24,6 +24,15 @@
 				method="post" enctype="multipart/form-data">
 				<table>
 					<tr>
+						<td>카테고리</td>
+						<td><form:select path="category" class="select-category">
+								<form:option value="" label="=== 카테고리 선택 ===" />
+								<form:options items="${categori}" itemValue="value"
+									itemLabel="label" />
+							</form:select></td>
+						<td><font color="red"><form:errors path="category" /></font></td>
+					</tr>
+					<tr>
 						<td><spring:message code="item.itemName" /></td>
 						<td><form:input path="itemName" /></td>
 						<td><font color="red"><form:errors path="itemName" /></font></td>

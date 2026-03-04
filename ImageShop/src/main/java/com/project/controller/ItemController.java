@@ -26,9 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.project.common.domain.CodeLabelValue;
 import com.project.common.security.domain.CustomUser;
 import com.project.domain.Item;
 import com.project.domain.Member;
+import com.project.service.CodeService;
 import com.project.service.ItemService;
 import com.project.service.MemberService;
 import com.project.service.UserItemService;
@@ -42,6 +44,9 @@ public class ItemController {
 
 	@Autowired
 	private ItemService service;
+	
+	@Autowired
+	private CodeService codeService;
 
 	@Value("${upload.path}")
 	private String uploadPath;
@@ -61,7 +66,12 @@ public class ItemController {
 	// 상품 등록 페이지
 	@GetMapping("/register")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public void registerForm(Model model) {
+	public void registerForm(Model model) throws Exception {
+		
+		String groupCode = "P00";
+		List<CodeLabelValue> categori = codeService.getCodeList(groupCode);
+		model.addAttribute("categori", categori);
+		
 		model.addAttribute(new Item());
 	}
 

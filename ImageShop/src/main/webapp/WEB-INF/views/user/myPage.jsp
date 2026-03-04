@@ -71,9 +71,13 @@
 
 		<div class="mypage-actions">
 			<button type="button" id="btnEdit"
-				onclick="location.href='/member/modify'">회원정보 수정</button>
+				onclick="location.href='/user/edit'">회원정보 수정</button>
+			<button type="button" id="btnUserItemList"
+				onclick="location.href='/useritem/list'">구매내역</button>
 			<button type="button" id="btnCoinHistory"
-				onclick="location.href='/coin/history'">코인 충전 내역</button>
+				onclick="location.href='/coin/listPay'">코인 충전 내역</button>
+			<button type="button" id="btnCoinCharge"
+				onclick="location.href='/coin/charge'">코인 충전</button>
 		</div>
 	</div>
 
