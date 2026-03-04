@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.project.common.security.domain.CustomUser;
 import com.project.domain.Member;
 import com.project.domain.UserItem;
+import com.project.exception.NotMyItemException;
 import com.project.service.UserItemService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -55,49 +56,61 @@ public class UserItemController {
 	}
 
 	// 구매 상품 다운 로드
-	@ResponseBody 
-	@RequestMapping("/download") 
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')") 
-	public ResponseEntity<byte[]> download(UserItem userItem, Authentication authentication) throws Exception { 
+	@ResponseBody
+	@RequestMapping("/download")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+	public ResponseEntity<byte[]> download(UserItem userItem, Authentication authentication) throws Exception {
 		log.info("요청받은 userItemNo: {}", userItem.getUserItemNo());
-	    log.info("설정된 uploadPath: {}", uploadPath);
-		
-		
-	UserItem _userItem = service.read(userItem); 
-	 
-	if (_userItem == null) {
-        log.error("DB에서 해당 상품 정보를 찾을 수 없습니다!");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-    
-    log.info("찾은 파일명: {}", _userItem.getPictureUrl());
-	
-	String fullName = _userItem.getPictureUrl(); 
-	 
-	InputStream in = null; 
-	ResponseEntity<byte[]> entity = null; 
-	 
-	try {  
-	HttpHeaders headers = new HttpHeaders(); 
-	 
-	in = new FileInputStream(uploadPath + File.separator + fullName); 
-	 
-	String fileName = fullName.substring(fullName.indexOf("_") + 1); 
-	 
-	 
-	headers.setContentType(MediaType.APPLICATION_OCTET_STREAM); 
-	headers.add("Content-Disposition", "attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\""); 
-	 
-	entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED); 
-	
-	} catch (Exception e) { 
-		e.printStackTrace();
-		entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST); 
-	} finally { 
-	in.close(); 
-	} 
-	 
-	return entity; 
+		log.info("설정된 uploadPath: {}", uploadPath);
+
+		UserItem _userItem = service.read(userItem);
+
+		if (_userItem == null) {
+			log.error("DB에서 해당 상품 정보를 찾을 수 없습니다!");
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		// 구매한 상품이 사용자의 것인지 체크한다.
+		CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		Member member = customUser.getMember();
+		if (userItem.getUserNo() != member.getUserNo()) {
+			throw new NotMyItemException("이것은 나의 구매 상품이 아니다.");
+		}
+
+		log.info("찾은 파일명: {}", _userItem.getPictureUrl());
+
+		String fullName = _userItem.getPictureUrl();
+
+		InputStream in = null;
+		ResponseEntity<byte[]> entity = null;
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+
+			in = new FileInputStream(uploadPath + File.separator + fullName);
+
+			String fileName = fullName.substring(fullName.indexOf("_") + 1);
+
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.add("Content-Disposition",
+					"attachment; filename=\"" + new String(fileName.getBytes("UTF-8"), "ISO-8859-1") + "\"");
+
+			entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+		} finally {
+			in.close();
+		}
+
+		return entity;
+	}
+
+	// 본인 상품 예외 처리
+	@GetMapping("/notMyItem")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_MEMBER')")
+	public void notMyItem(Model model) throws Exception {
 	}
 
 }

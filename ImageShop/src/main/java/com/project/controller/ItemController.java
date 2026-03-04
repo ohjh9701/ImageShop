@@ -98,7 +98,11 @@ public class ItemController {
 	@GetMapping("/detail")
 	public String read(Item item, Model model) throws Exception {
 		Item _item = service.read(item);
-		model.addAttribute(_item);
+		if(_item != null) {
+			model.addAttribute(_item);
+		} else {
+			throw new Exception("잘못된 상품 페이지입니다.");
+		}
 		return "item/detail";
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.domain.ChargeCoin;
 import com.project.domain.Member;
@@ -17,6 +18,7 @@ public class CoinServiceImpl implements CoinService {
 	private CoinMapper mapper;
 
 	@Override
+	@Transactional
 	public int charge(ChargeCoin chargeCoin) throws Exception {
 		 int count = mapper.charge(chargeCoin);
 		 
@@ -32,11 +34,13 @@ public class CoinServiceImpl implements CoinService {
 	}
 
 	@Override
+	@Transactional
 	public int pay(PayCoin payCoin) throws Exception {
 		return mapper.pay(payCoin);
 	}
 
 	@Override
+	@Transactional
 	public int createPayHistory(PayCoin payCoin) throws Exception {
 		return mapper.createPayHistory(payCoin);
 	}
